@@ -21,20 +21,15 @@ public class AppConfigWindow : EditorWindow {
     }
 
     private void Initialize() {
-
-        TimiSharedURI fileURI = AppConfigHelper.AppConfigFileURI;
-        using (Stream fileStream = FileLoader.GetFileStreamSync(fileURI, FileMode.Open, FileAccess.Read)) {
-            TextAsset appConfigTextAsset = Resources.Load<TextAsset>(AppConfigHelper.AppConfigFileURI.GetFullPath());
-            AppConfigData appConfigData = AppConfigHelper.LoadAppConfigDataFromTextAsset(appConfigTextAsset);
-            if (appConfigData != null) {
-                this._appID = appConfigData.appID;
-                this._appPhotonID = appConfigData.appPhotonID;
-                this._currentEnvironment = appConfigData.currentEnvironment;
-                this._deviceId = appConfigData.debugDeviceId;
-            } else {
-                this._currentEnvironment = AppConfig.Environment.LOCAL;
-            }
-            fileStream.Close();
+        TextAsset appConfigTextAsset = Resources.Load<TextAsset>("BootstrapData/AppConfig");
+        AppConfigData appConfigData = AppConfigHelper.LoadAppConfigDataFromTextAsset(appConfigTextAsset);
+        if (appConfigData != null) {
+            this._appID = appConfigData.appID;
+            this._appPhotonID = appConfigData.appPhotonID;
+            this._currentEnvironment = appConfigData.currentEnvironment;
+            this._deviceId = appConfigData.debugDeviceId;
+        } else {
+            this._currentEnvironment = AppConfig.Environment.LOCAL;
         }
 
         this._initialized = true;
