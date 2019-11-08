@@ -1,8 +1,6 @@
 using System.Collections;
-using System.IO;
 using TimiShared.Debug;
 using TimiShared.Init;
-using TimiShared.Loading;
 using TimiShared.Instance;
 using UnityEngine;
 
@@ -39,28 +37,13 @@ public class AppConfig : MonoBehaviour, IInitializable, IInstance {
         return _appConfigData.currentEnvironment;
     }
 
-    public string GetLobbyServerUrl() {
-        switch (this.GetCurrentEnvironment()) {
-            case Environment.LOCAL: return "ws://localhost:8000/" + _appConfigData.lobbyServerEndpoint + "/";
-            case Environment.DEV: return "ws://34.93.33.242:8000/" + _appConfigData.lobbyServerEndpoint + "/";    // TODO: avi: Update this
-            case Environment.STAGING: return "ws://10.197.37.146:8000/" + _appConfigData.lobbyServerEndpoint + "/";    // TODO: avi: Update this
-            case Environment.PROD: return "" + _appConfigData.lobbyServerEndpoint + "/";
+    public string GetAppPhotonID() {
+        if (_appConfigData == null) {
+            DebugLog.LogErrorColor("AppConfig not set", LogColor.red);
+            return "";
         }
-
-        return null;
+        return _appConfigData.appPhotonID;
     }
-
-    public string GetRoomServerUrl() {
-        switch (this.GetCurrentEnvironment()) {
-            case Environment.LOCAL: return "ws://localhost:8001/" + _appConfigData.roomServerEndpoint + "/";
-            case Environment.DEV: return "ws://34.93.33.242:8001/" + _appConfigData.roomServerEndpoint + "/";    // TODO: avi: Update this
-            case Environment.STAGING: return "ws://10.197.37.146:9000/" + _appConfigData.roomServerEndpoint + "/";    // TODO: avi: Update this
-            case Environment.PROD: return "" + _appConfigData.roomServerEndpoint + "/";
-        }
-
-        return null;
-    }
-
 
     public string GetDebugDeviceID() {
         if (UnityEngine.Debug.isDebugBuild) {

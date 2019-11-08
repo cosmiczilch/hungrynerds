@@ -3,9 +3,8 @@
 public class AppConfigData {
 
     public int appID;
+    public string appPhotonID;
     public AppConfig.Environment currentEnvironment;
-    public string lobbyServerEndpoint;
-    public string roomServerEndpoint;
     public string debugDeviceId;
 
 }

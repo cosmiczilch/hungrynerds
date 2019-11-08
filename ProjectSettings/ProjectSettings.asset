@@ -541,7 +541,9 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLWasmStreaming: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    1: TIMI_SHARED_DEBUG
+    7: TIMI_SHARED_DEBUG
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}

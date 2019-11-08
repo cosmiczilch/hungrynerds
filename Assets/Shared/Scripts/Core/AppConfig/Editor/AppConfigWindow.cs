@@ -6,9 +6,8 @@ using UnityEngine;
 public class AppConfigWindow : EditorWindow {
 
     private int _appID;
+    private string _appPhotonID;
     private AppConfig.Environment _currentEnvironment;
-    private string _lobbyServerEndpoint;
-    private string _roomServerEndpoint;
     private string _deviceId;
     private bool _initialized = false;
 
@@ -29,9 +28,8 @@ public class AppConfigWindow : EditorWindow {
             AppConfigData appConfigData = AppConfigHelper.LoadAppConfigDataFromTextAsset(appConfigTextAsset);
             if (appConfigData != null) {
                 this._appID = appConfigData.appID;
+                this._appPhotonID = appConfigData.appPhotonID;
                 this._currentEnvironment = appConfigData.currentEnvironment;
-                this._lobbyServerEndpoint = appConfigData.lobbyServerEndpoint;
-                this._roomServerEndpoint = appConfigData.roomServerEndpoint;
                 this._deviceId = appConfigData.debugDeviceId;
             } else {
                 this._currentEnvironment = AppConfig.Environment.LOCAL;
@@ -48,35 +46,31 @@ public class AppConfigWindow : EditorWindow {
         }
 
         string newAppIDString = EditorGUILayout.TextField("App ID:", this._appID.ToString());
+        string newAppPhotonIDString = EditorGUILayout.TextField("App Photon ID:", this._appPhotonID.ToString());
         int newAppID;
         if (!int.TryParse(newAppIDString, out newAppID)) {
             newAppID = 0;
         }
         AppConfig.Environment newEnvironment = (AppConfig.Environment)EditorGUILayout.EnumPopup("Current Environment:", this._currentEnvironment);
-        string newLobbyServerEndpoint = EditorGUILayout.TextField("Lobby Server Endpoint", this._lobbyServerEndpoint);
-        string newRoomServerEndpoint = EditorGUILayout.TextField("Room Server Endpoint", this._roomServerEndpoint);
         string newDeviceId = EditorGUILayout.TextField("Debug Device ID", this._deviceId);
 
         if (newAppID != this._appID ||
+            newAppPhotonIDString != this._appPhotonID ||
             newEnvironment != this._currentEnvironment ||
-            newLobbyServerEndpoint != this._lobbyServerEndpoint ||
-            newRoomServerEndpoint != this._roomServerEndpoint ||
             newDeviceId != this._deviceId) {
-            this.SaveEnvironmentSelection(newAppID, newEnvironment, newLobbyServerEndpoint, newRoomServerEndpoint, newDeviceId);
+            this.SaveEnvironmentSelection(newAppID, newAppPhotonIDString, newEnvironment, newDeviceId);
             this._appID = newAppID;
+            this._appPhotonID = newAppPhotonIDString;
             this._currentEnvironment = newEnvironment;
-            this._lobbyServerEndpoint = newLobbyServerEndpoint;
-            this._roomServerEndpoint = newRoomServerEndpoint;
             this._deviceId = newDeviceId;
         }
     }
 
-    private void SaveEnvironmentSelection(int appID, AppConfig.Environment environment, string lobbyServerEndpoint, string roomServerEndpoint, string deviceId) {
+    private void SaveEnvironmentSelection(int appID, string appPhotonID, AppConfig.Environment environment, string deviceId) {
         AppConfigData newAppConfigData = new AppConfigData();
         newAppConfigData.appID = appID;
+        newAppConfigData.appPhotonID = appPhotonID;
         newAppConfigData.currentEnvironment = environment;
-        newAppConfigData.lobbyServerEndpoint = lobbyServerEndpoint;
-        newAppConfigData.roomServerEndpoint = roomServerEndpoint;
         newAppConfigData.debugDeviceId = deviceId;
         AppConfigHelper.SaveAppConfigData(newAppConfigData);
     }
