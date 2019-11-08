@@ -1,4 +1,5 @@
 using Init;
+using Lobby;
 using TimiShared.Debug;
 using TimiShared.Instance;
 using TimiShared.Loading;
@@ -17,7 +18,6 @@ public class AppSceneManager : IInstance {
         GAME_SCENE
     }
 
-    private const string kLoginSceneName = "LoginScene";
     private const string kLobbySceneName = "LobbyScene";
     private const string kGameSceneName = "GameScene";
 
@@ -25,6 +25,8 @@ public class AppSceneManager : IInstance {
     public void LoadLobbyScene(System.Action callback) {
         this.LoadScene(AppScene.LOBBY_SCENE, (success) => {
             if (success) {
+                UILobbyController lobbyController = new UILobbyController();
+                lobbyController.PresentDialog();
             }
         });
     }
