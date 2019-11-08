@@ -13,7 +13,7 @@ public class Core : MonoBehaviour {
     [SerializeField] private SharedInit _sharedInit = null;
     [SerializeField] private FirstLaunchManager _firstLaunchManager = null;
     [SerializeField] private AppConfig _appConfig = null;
-    [SerializeField] private MultiPlayerManager _multiPlayerManager;
+    [SerializeField] private MultiPlayerManager _multiPlayerManager = null;
     [SerializeField] private DataModelsLoader _dataModelsLoader = null;
     [SerializeField] private IdentityManager _identityManager = null;
     [SerializeField] private AppInitBase _appInit = null;

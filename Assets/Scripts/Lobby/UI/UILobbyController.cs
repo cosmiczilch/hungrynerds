@@ -1,3 +1,4 @@
+using TimiMultiPlayer;
 using TimiShared.Debug;
 using TimiShared.UI;
 
@@ -14,7 +15,15 @@ namespace Lobby {
         }
 
         private void HandlePlayButtonClicked() {
-            DebugLog.LogErrorColor("Play button clicked", LogColor.red);
+            MultiPlayerManager.Instance.CreateOrJoinRandomRoom(this.HandleRoomJoined, this.HandleRoomJoinFailed);
+        }
+
+        private void HandleRoomJoined() {
+            DebugLog.LogColor("Room joined", LogColor.purple);
+        }
+
+        private void HandleRoomJoinFailed() {
+            DebugLog.LogColor("Room join failed", LogColor.red);
         }
     }
 }
