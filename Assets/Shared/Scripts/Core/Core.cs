@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Init;
+using TimiMultiPlayer;
 using TimiShared.Debug;
 using TimiShared.Extensions;
 using TimiShared.Identity;
@@ -12,6 +13,7 @@ public class Core : MonoBehaviour {
     [SerializeField] private SharedInit _sharedInit = null;
     [SerializeField] private FirstLaunchManager _firstLaunchManager = null;
     [SerializeField] private AppConfig _appConfig = null;
+    [SerializeField] private MultiPlayerManager _multiPlayerManager;
     [SerializeField] private DataModelsLoader _dataModelsLoader = null;
     [SerializeField] private IdentityManager _identityManager = null;
     [SerializeField] private AppInitBase _appInit = null;
@@ -43,11 +45,14 @@ public class Core : MonoBehaviour {
         this._appConfig.AssertNotNull("App Config");
         initializables.AddInitializable(this._appConfig);
 
-        this._appInit.AssertNotNull("App Init");
-        initializables.AddInitializable(this._appInit);
-
         this._identityManager.AssertNotNull("Identity Manager");
         initializables.AddInitializable(this._identityManager);
+
+        this._multiPlayerManager.AssertNotNull("Multiplayer Manager");
+        initializables.AddInitializable(this._multiPlayerManager);
+
+        this._appInit.AssertNotNull("App Init");
+        initializables.AddInitializable(this._appInit);
 
         this._dataModelsLoader.AssertNotNull("Data Models Loader");
         initializables.AddInitializable(this._dataModelsLoader);

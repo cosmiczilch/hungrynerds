@@ -25,13 +25,10 @@ namespace TimiShared.Identity {
         }
         #endregion
 
-
-        private void Awake() {
-            InstanceLocator.RegisterInstance<IdentityManager>(this);
-        }
-
         #region IInitializable
         public void StartInitialize() {
+            InstanceLocator.RegisterInstance<IdentityManager>(this);
+
             string duid = SystemInfo.deviceUniqueIdentifier;
             if (string.IsNullOrEmpty(duid)) {
                 DebugLog.LogErrorColor("Failed to get device unique identifier", LogColor.red);
