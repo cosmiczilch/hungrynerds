@@ -1,10 +1,10 @@
 using System.Collections;
-using SharedBrawl.Debug;
-using SharedBrawl.Init;
-using SharedBrawl.Instance;
+using TimiShared.Debug;
+using TimiShared.Init;
+using TimiShared.Instance;
 using UnityEngine;
 
-namespace SharedBrawl.Loading {
+namespace TimiShared.Loading {
     // TODO: Change this to not be a MonoBehaviour; right now the only reason this is a MonoBehaviour is for this.StartCoroutine
     // TODO: Add templated loaders
     public class PrefabLoader : MonoBehaviour, IInitializable, IInstance {

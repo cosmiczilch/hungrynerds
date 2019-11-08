@@ -1,19 +1,13 @@
 using System.Collections;
-using SharedBrawl.Extensions;
-using SharedBrawl.Instance;
-using SharedBrawl.Loading;
-using SharedBrawl.Multiplayer;
+using TimiShared.Extensions;
+using TimiShared.Loading;
 using UnityEngine;
 
-namespace SharedBrawl.Init {
+namespace TimiShared.Init {
     public class SharedInit : MonoBehaviour, IInitializable {
 
-        [SerializeField] private PrefabLoader _prefabLoader;
-        [SerializeField] private SceneLoader _sceneLoader;
-        [SerializeField] private bool _useMultiplayer;
-        
-        private MatchmakerClient _matchmakerClient;
-        private RoomServerClient _roomServerClient;
+        [SerializeField] private PrefabLoader _prefabLoader = null;
+        [SerializeField] private SceneLoader _sceneLoader = null;
 
         #region IInitializable
         public void StartInitialize() {
@@ -37,12 +31,8 @@ namespace SharedBrawl.Init {
             if (!this.IsFullyInitialized) {
                 return;
             }
-
-            if (this._matchmakerClient != null) {
-                this._matchmakerClient.Cleanup();
-            }
         }
-        
+
         private IEnumerator InitializationSequence(System.Action callback) {
 
             InitializableSerialGroup initializables = new InitializableSerialGroup("Shared Init");
@@ -56,14 +46,6 @@ namespace SharedBrawl.Init {
             initializables.StartInitialize();
             while (!initializables.IsFullyInitialized) {
                 yield return null;
-            }
-            
-            if (this._useMultiplayer) {
-                this._matchmakerClient = new MatchmakerClient();
-                InstanceLocator.RegisterInstance<MatchmakerClient>(this._matchmakerClient);
-                
-                this._roomServerClient = new RoomServerClient();
-                InstanceLocator.RegisterInstance<RoomServerClient>(this._roomServerClient);
             }
 
             callback.Invoke();

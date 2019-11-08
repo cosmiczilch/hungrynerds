@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SharedBrawl.Extensions {
+namespace TimiShared.Extensions {
 
     public static class DictionaryExtensions {
 

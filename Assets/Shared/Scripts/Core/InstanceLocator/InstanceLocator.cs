@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using SharedBrawl.Debug;
+using TimiShared.Debug;
 
-namespace SharedBrawl.Instance {
+namespace TimiShared.Instance {
     public static class InstanceLocator {
         private static Dictionary<Type, IInstance> _instances = new Dictionary<Type, IInstance>();
 

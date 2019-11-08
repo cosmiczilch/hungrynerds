@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using SharedBrawl.Debug;
+using TimiShared.Debug;
 using UnityEngine;
 
-namespace SharedBrawl.Init {
+namespace TimiShared.Init {
 
     public class InitializableSerialGroup : InitializableGroup {
 

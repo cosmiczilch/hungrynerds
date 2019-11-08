@@ -1,8 +1,8 @@
 using System.IO;
-using SharedBrawl.Debug;
+using TimiShared.Debug;
 using UnityEngine;
 
-namespace SharedBrawl.Loading {
+namespace TimiShared.Loading {
     public enum FileBasePathType {
         LocalDataPath = 1,
         LocalStreamingAssetsPath = 2,
@@ -10,9 +10,9 @@ namespace SharedBrawl.Loading {
         RemoteWebURL = 10
     }
 
-    public class SharedBrawlURI {
+    public class TimiSharedURI {
 
-        public SharedBrawlURI(FileBasePathType basePathType, string relativePath) {
+        public TimiSharedURI(FileBasePathType basePathType, string relativePath) {
             this.BasePathType = basePathType;
             this.RelativePath = relativePath;
         }
@@ -55,12 +55,12 @@ namespace SharedBrawl.Loading {
             return Path.Combine(basePath, this.RelativePath);
         }
 
-        public static SharedBrawlURI Combine(SharedBrawlURI uri1, SharedBrawlURI uri2) {
+        public static TimiSharedURI Combine(TimiSharedURI uri1, TimiSharedURI uri2) {
             if (uri1.BasePathType != uri2.BasePathType) {
                 DebugLog.LogErrorColor("Cannot combine " + uri1 + " with " + uri2, LogColor.grey);
                 return null;
             }
-            SharedBrawlURI result = new SharedBrawlURI(uri1.BasePathType, Path.Combine(uri1.RelativePath, uri2.RelativePath));
+            TimiSharedURI result = new TimiSharedURI(uri1.BasePathType, Path.Combine(uri1.RelativePath, uri2.RelativePath));
             return result;
         }
         #endregion

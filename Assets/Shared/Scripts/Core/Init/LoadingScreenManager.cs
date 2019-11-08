@@ -1,20 +1,20 @@
 using System.Collections;
-using SharedBrawl.Init;
-using SharedBrawl.Instance;
+using TimiShared.Init;
+using TimiShared.Instance;
 using UnityEngine;
 
 namespace Init {
     public class LoadingScreenManager : MonoBehaviour, IInstance, IInitializable {
-        
+
         public static LoadingScreenManager Instance {
             get {
                 return InstanceLocator.Instance<LoadingScreenManager>();
             }
         }
 
-        [SerializeField] private Transform _loadingScreenTransform;
-        [SerializeField] private Animator _loadingScreenAnimator;
-        [SerializeField] private Animator _textAnimator;
+        [SerializeField] private Transform _loadingScreenTransform = null;
+        [SerializeField] private Animator _loadingScreenAnimator = null;
+        [SerializeField] private Animator _textAnimator = null;
 
         [SerializeField] private float _loadingScreenMinDurationSeconds = 1.5f;
         public float MinDurationSeconds {
@@ -22,19 +22,19 @@ namespace Init {
                 return this._loadingScreenMinDurationSeconds;
             }
         }
-        
+
         private float _lastLoadingScreenShownTime = float.MinValue;
 
         private void Awake() {
             InstanceLocator.RegisterInstance<LoadingScreenManager>(this);
         }
-        
+
         public void StartInitialize() {
             this._lastLoadingScreenShownTime = Time.time;
             this.ShowLoadingScreen(false);
             this.IsFullyInitialized = true;
         }
-        
+
         public bool IsFullyInitialized { get; private set; }
 
         public string GetName {
@@ -42,7 +42,7 @@ namespace Init {
                 return this.GetType().Name;
             }
         }
-        
+
 
         public void ShowLoadingScreen(bool show, bool animate = false) {
             if (show) {
@@ -73,7 +73,7 @@ namespace Init {
             yield return new WaitForSeconds(delaySeconds);
             this.ShowLoadingScreenInternal(false, false);
         }
-        
+
 
     }
 }

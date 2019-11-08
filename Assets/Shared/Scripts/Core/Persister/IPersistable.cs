@@ -1,5 +1,5 @@
 
-namespace SharedBrawl.Persister {
+namespace TimiShared.Persister {
 
     public interface IPersistable {
         string GetBaseFolderName();

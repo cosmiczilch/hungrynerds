@@ -1,13 +1,13 @@
 using System;
 using System.Security.Cryptography;
 using System.Text;
-using SharedBrawl.Debug;
-using SharedBrawl.Init;
-using SharedBrawl.Instance;
+using TimiShared.Debug;
+using TimiShared.Init;
+using TimiShared.Instance;
 using UnityEngine;
 
-namespace SharedBrawl.Identity {
-    
+namespace TimiShared.Identity {
+
     public class IdentityManager : MonoBehaviour, IInstance, IInitializable {
 
         #region Public Api
@@ -24,8 +24,8 @@ namespace SharedBrawl.Identity {
             }
         }
         #endregion
-        
-        
+
+
         private void Awake() {
             InstanceLocator.RegisterInstance<IdentityManager>(this);
         }

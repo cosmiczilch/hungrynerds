@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace SharedBrawl.Init {
-    
+namespace TimiShared.Init {
+
     public class AppInitBase : MonoBehaviour, IInitializable {
-        
+
         public virtual void StartInitialize() {
             throw new System.NotImplementedException();
         }

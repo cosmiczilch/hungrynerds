@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using SharedBrawl.Debug;
-using SharedBrawl.Init;
+using TimiShared.Debug;
+using TimiShared.Init;
 using UnityEngine;
 
 public class DataModelsLoader : MonoBehaviour, IInitializable {

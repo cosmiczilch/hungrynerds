@@ -1,7 +1,7 @@
 using UnityEngine;
 
-namespace SharedBrawl.UI {
-    
+namespace TimiShared.UI {
+
     public interface IDialogController {
 
         void PresentDialog(Transform parent = null, System.Action callback = null);

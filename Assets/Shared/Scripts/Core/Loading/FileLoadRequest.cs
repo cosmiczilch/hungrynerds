@@ -1,8 +1,8 @@
 using System.IO;
-using SharedBrawl.Debug;
+using TimiShared.Debug;
 using UnityEngine.Networking;
 
-namespace SharedBrawl.Loading {
+namespace TimiShared.Loading {
 
     public class FileLoadRequest : AsyncRequest {
 

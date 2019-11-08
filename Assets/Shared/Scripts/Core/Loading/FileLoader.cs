@@ -1,8 +1,8 @@
 ﻿using System.IO;
-using SharedBrawl.Debug;
+using TimiShared.Debug;
 using UnityEngine;
 
-namespace SharedBrawl.Loading {
+namespace TimiShared.Loading {
     public class FileLoader {
 
         #region Public API
@@ -10,7 +10,7 @@ namespace SharedBrawl.Loading {
          Currently supports loading files from persistent data path everywhere, and
          from streaming assets and data path iff editor
          */
-        public static Stream GetFileStreamSync(SharedBrawlURI fileURI, FileMode mode, FileAccess accessType) {
+        public static Stream GetFileStreamSync(TimiSharedURI fileURI, FileMode mode, FileAccess accessType) {
             if (!FileLoader.CheckParameters(fileURI, mode, accessType)) {
                 return null;
             }
@@ -28,7 +28,7 @@ namespace SharedBrawl.Loading {
             return fileStream;
         }
 
-        public static FileLoadRequest GetFileStreamAsync(SharedBrawlURI fileURI, FileMode mode, FileAccess accessType) {
+        public static FileLoadRequest GetFileStreamAsync(TimiSharedURI fileURI, FileMode mode, FileAccess accessType) {
             if (!FileLoader.CheckParameters(fileURI, mode, accessType)) {
                 return null;
             }
@@ -38,7 +38,7 @@ namespace SharedBrawl.Loading {
         #endregion
 
 
-        private static bool CheckParameters(SharedBrawlURI fileURI, FileMode mode, FileAccess accessType) {
+        private static bool CheckParameters(TimiSharedURI fileURI, FileMode mode, FileAccess accessType) {
             if (accessType == FileAccess.Write || accessType == FileAccess.ReadWrite) {
                 if (fileURI.BasePathType != FileBasePathType.LocalPersistentDataPath) {
                     if (!Application.isEditor ||

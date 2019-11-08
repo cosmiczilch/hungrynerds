@@ -1,22 +1,22 @@
 ﻿using System.Collections;
 using Init;
-using SharedBrawl.Debug;
-using SharedBrawl.Extensions;
-using SharedBrawl.Identity;
-using SharedBrawl.Init;
-using SharedBrawl.Login;
+using TimiShared.Debug;
+using TimiShared.Extensions;
+using TimiShared.Identity;
+using TimiShared.Init;
+using TimiShared.Login;
 using UnityEngine;
 
 public class Core : MonoBehaviour {
 
-    [SerializeField] private SharedInit _sharedInit;
-    [SerializeField] private FirstLaunchManager _firstLaunchManager;
-    [SerializeField] private AppConfig _appConfig;
-    [SerializeField] private DataModelsLoader _dataModelsLoader;
-    [SerializeField] private IdentityManager _identityManager;
-    [SerializeField] private AppInitBase _appInit;
-    [SerializeField] private AppLoaderBase _appLoader;
-    [SerializeField] private LoadingScreenManager _loadingScreenManager;
+    [SerializeField] private SharedInit _sharedInit = null;
+    [SerializeField] private FirstLaunchManager _firstLaunchManager = null;
+    [SerializeField] private AppConfig _appConfig = null;
+    [SerializeField] private DataModelsLoader _dataModelsLoader = null;
+    [SerializeField] private IdentityManager _identityManager = null;
+    [SerializeField] private AppInitBase _appInit = null;
+    [SerializeField] private AppLoaderBase _appLoader = null;
+    [SerializeField] private LoadingScreenManager _loadingScreenManager = null;
 
     private void Awake () {
         DontDestroyOnLoad(this.gameObject);
@@ -36,19 +36,19 @@ public class Core : MonoBehaviour {
 
         this._sharedInit.AssertNotNull("Shared Init");
         initializables.AddInitializable(this._sharedInit);
-        
+
         this._firstLaunchManager.AssertNotNull("First Launch Manager");
         initializables.AddInitializable(this._firstLaunchManager);
-        
+
         this._appConfig.AssertNotNull("App Config");
         initializables.AddInitializable(this._appConfig);
 
         this._appInit.AssertNotNull("App Init");
         initializables.AddInitializable(this._appInit);
-        
+
         this._identityManager.AssertNotNull("Identity Manager");
         initializables.AddInitializable(this._identityManager);
-        
+
         this._dataModelsLoader.AssertNotNull("Data Models Loader");
         initializables.AddInitializable(this._dataModelsLoader);
 
@@ -69,7 +69,7 @@ public class Core : MonoBehaviour {
         while (!this._appLoader.IsFullyInitialized) {
             yield return null;
         }
-        
+
         this._loadingScreenManager.AssertNotNull("Loading Screen Manager");
         this._loadingScreenManager.StartInitialize();
         while (!this._loadingScreenManager.IsFullyInitialized) {
@@ -83,7 +83,7 @@ public class Core : MonoBehaviour {
         if (Application.isEditor) {
             return;
         }
-        
+
         if (!isPaused) {
             return;
         }

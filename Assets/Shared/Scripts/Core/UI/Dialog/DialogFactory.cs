@@ -1,8 +1,8 @@
-using SharedBrawl.Debug;
-using SharedBrawl.Loading;
+using TimiShared.Debug;
+using TimiShared.Loading;
 using UnityEngine;
 
-namespace SharedBrawl.UI {
+namespace TimiShared.UI {
     public class DialogFactory : MonoBehaviour {
 
         public void CreateDialog(string prefabPath, System.Action<DialogViewBase> callback, Transform parent = null) {

@@ -1,5 +1,5 @@
 using System.IO;
-using SharedBrawl.Loading;
+using TimiShared.Loading;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ public class AppConfigWindow : EditorWindow {
     private string _deviceId;
     private bool _initialized = false;
 
-    [MenuItem("SharedBrawl/AppConfig")]
+    [MenuItem("TimiShared/AppConfig")]
     public static void ShowWindow() {
         AppConfigWindow thisWindow = EditorWindow.GetWindow(typeof(AppConfigWindow)) as AppConfigWindow;
 
@@ -23,7 +23,7 @@ public class AppConfigWindow : EditorWindow {
 
     private void Initialize() {
 
-        SharedBrawlURI fileURI = AppConfigHelper.AppConfigFileURI;
+        TimiSharedURI fileURI = AppConfigHelper.AppConfigFileURI;
         using (Stream fileStream = FileLoader.GetFileStreamSync(fileURI, FileMode.Open, FileAccess.Read)) {
             TextAsset appConfigTextAsset = Resources.Load<TextAsset>(AppConfigHelper.AppConfigFileURI.GetFullPath());
             AppConfigData appConfigData = AppConfigHelper.LoadAppConfigDataFromTextAsset(appConfigTextAsset);

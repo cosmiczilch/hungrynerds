@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-namespace SharedBrawl.UI {
+namespace TimiShared.UI {
     public abstract class DialogControllerBase<V> : IDialogController
     where V: DialogViewBase {
 
@@ -30,7 +30,7 @@ namespace SharedBrawl.UI {
 
         public void RemoveDialog() {
             this.OnRemoveDialog();
-            
+
             this._view.Hide();
             this._view = null;
         }

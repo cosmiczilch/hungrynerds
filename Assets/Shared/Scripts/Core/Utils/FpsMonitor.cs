@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using SharedBrawl.Instance;
+using TimiShared.Instance;
 using UnityEngine;
 
-namespace SharedBrawl.Utils {
+namespace TimiShared.Utils {
     public class FpsMonitor : MonoBehaviour, IInstance {
 
         public static FpsMonitor Instance {

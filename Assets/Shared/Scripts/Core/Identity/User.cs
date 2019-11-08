@@ -1,5 +1,5 @@
-namespace SharedBrawl.Identity {
-    
+namespace TimiShared.Identity {
+
     public class User {
         private int _id;
 

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SharedBrawl.UI {
+namespace TimiShared.UI {
 
     public class DialogViewPool : MonoBehaviour {
 

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
-using SharedBrawl.Debug;
-using SharedBrawl.Loading;
+using TimiShared.Debug;
+using TimiShared.Loading;
 
-namespace SharedBrawl.Utils {
+namespace TimiShared.Utils {
 
     public class CSVReader {
 
@@ -23,7 +23,7 @@ namespace SharedBrawl.Utils {
 
         // Reads a CSV that is formatted as comma separated values per line
         // The first line must contain the legend
-        public static CSVResult ReadCSVFile(SharedBrawlURI fileURI) {
+        public static CSVResult ReadCSVFile(TimiSharedURI fileURI) {
             CSVResult result = null;
             using (Stream fileStream = FileLoader.GetFileStreamSync(fileURI, FileMode.Open, FileAccess.Read)) {
 

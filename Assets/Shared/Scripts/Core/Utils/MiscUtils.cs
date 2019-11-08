@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-namespace SharedBrawlUtils {
+namespace TimiSharedUtils {
 
     public class Pair<U, V> {
         public U First  { get; set; }

@@ -1,10 +1,10 @@
 using System.IO;
-using SharedBrawl.Debug;
-using SharedBrawl.Extensions;
-using SharedBrawl.Loading;
-using SharedBrawl.Utils;
+using TimiShared.Debug;
+using TimiShared.Extensions;
+using TimiShared.Loading;
+using TimiShared.Utils;
 
-namespace SharedBrawl.Persister {
+namespace TimiShared.Persister {
 
     public class Persister {
 
@@ -20,8 +20,8 @@ namespace SharedBrawl.Persister {
                 return false;
             }
 
-            SharedBrawlURI baseURI = this.BaseURI;
-            SharedBrawlURI fileURI = this.FullFileURI;
+            TimiSharedURI baseURI = this.BaseURI;
+            TimiSharedURI fileURI = this.FullFileURI;
 
             if (!FileUtils.DoesDirectoryExist(baseURI)) {
                 FileUtils.CreateDirectory(baseURI);
@@ -29,7 +29,7 @@ namespace SharedBrawl.Persister {
 
             using (Stream fileStream = FileLoader.GetFileStreamSync(fileURI, FileMode.Create, FileAccess.ReadWrite)) {
                 if (fileStream != null) {
-                    SharedBrawlSerializer.Serialize(fileStream, this._target);
+                    TimiSharedSerializer.Serialize(fileStream, this._target);
                     fileStream.Flush();
                     fileStream.Close();
                     return true;
@@ -42,7 +42,7 @@ namespace SharedBrawl.Persister {
         }
 
         public bool Restore() {
-            SharedBrawlURI fileURI = this.FullFileURI;
+            TimiSharedURI fileURI = this.FullFileURI;
 
             if (!FileUtils.DoesFileExist(fileURI)) {
                 return false;
@@ -50,7 +50,7 @@ namespace SharedBrawl.Persister {
 
             using (Stream fileStream = FileLoader.GetFileStreamSync(fileURI, FileMode.Open, FileAccess.Read)) {
                 if (fileStream != null) {
-                    var obj = SharedBrawlSerializer.DeserializeNonGeneric(this._target.GetType(), fileStream);
+                    var obj = TimiSharedSerializer.DeserializeNonGeneric(this._target.GetType(), fileStream);
                     return this._target.CopyObjectFieldsFrom(obj);
 
                 } else {
@@ -62,16 +62,16 @@ namespace SharedBrawl.Persister {
         }
 
         #region Helpers
-        public SharedBrawlURI BaseURI {
+        public TimiSharedURI BaseURI {
             get {
-                return new SharedBrawlURI(FileBasePathType.LocalPersistentDataPath, this._target.GetBaseFolderName());
+                return new TimiSharedURI(FileBasePathType.LocalPersistentDataPath, this._target.GetBaseFolderName());
             }
         }
 
-        public SharedBrawlURI FullFileURI {
+        public TimiSharedURI FullFileURI {
             get {
-                SharedBrawlURI relativeURI = new SharedBrawlURI(FileBasePathType.LocalPersistentDataPath, this._target.GetFileName());
-                return SharedBrawlURI.Combine(this.BaseURI, relativeURI);
+                TimiSharedURI relativeURI = new TimiSharedURI(FileBasePathType.LocalPersistentDataPath, this._target.GetFileName());
+                return TimiSharedURI.Combine(this.BaseURI, relativeURI);
             }
         }
         #endregion

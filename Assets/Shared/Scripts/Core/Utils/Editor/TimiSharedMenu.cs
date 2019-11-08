@@ -1,15 +1,15 @@
-using SharedBrawl.Debug;
-using SharedBrawl.Loading;
-using SharedBrawl.Utils;
+using TimiShared.Debug;
+using TimiShared.Loading;
+using TimiShared.Utils;
 using UnityEditor;
 
-namespace SharedBrawl.Menu {
-    
-    public static class SharedBrawlMenu {
+namespace TimiShared.Menu {
 
-        [MenuItem("SharedBrawl/Clear Persistent AppData")]
+    public static class TimiSharedMenu {
+
+        [MenuItem("TimiShared/Clear Persistent AppData")]
         static void ClearPersistentAppData() {
-            SharedBrawlURI appDataURI = new SharedBrawlURI(FileBasePathType.LocalPersistentDataPath, "AppData");
+            TimiSharedURI appDataURI = new TimiSharedURI(FileBasePathType.LocalPersistentDataPath, "AppData");
             if (FileUtils.DoesDirectoryExist(appDataURI)) {
                 FileUtils.DeleteDirectory(appDataURI);
                 DebugLog.LogColor("Cleared persistent app data", LogColor.grey);

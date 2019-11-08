@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using SharedBrawl.Extensions;
+using TimiShared.Extensions;
 
-namespace SharedBrawl.Debug {
+namespace TimiShared.Debug {
     public class LogColor {
         private LogColor(string colorName) {
             this._prefix = "<color=" + colorName + ">";

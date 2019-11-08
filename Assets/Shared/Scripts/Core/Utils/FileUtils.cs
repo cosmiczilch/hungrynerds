@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using SharedBrawl.Debug;
-using SharedBrawl.Loading;
+using TimiShared.Debug;
+using TimiShared.Loading;
 using UnityEngine;
 
-namespace SharedBrawl.Utils {
+namespace TimiShared.Utils {
     public static class FileUtils {
 
-        public static bool DoesFileExist(SharedBrawlURI uri) {
+        public static bool DoesFileExist(TimiSharedURI uri) {
             if (uri.BasePathType == FileBasePathType.LocalDataPath ||
                 uri.BasePathType == FileBasePathType.LocalPersistentDataPath ||
                 uri.BasePathType == FileBasePathType.LocalStreamingAssetsPath) {
@@ -23,7 +23,7 @@ namespace SharedBrawl.Utils {
             }
         }
 
-        public static bool DoesDirectoryExist(SharedBrawlURI uri) {
+        public static bool DoesDirectoryExist(TimiSharedURI uri) {
             if (uri.BasePathType == FileBasePathType.LocalDataPath ||
                 uri.BasePathType == FileBasePathType.LocalPersistentDataPath ||
                 uri.BasePathType == FileBasePathType.LocalStreamingAssetsPath) {
@@ -37,7 +37,7 @@ namespace SharedBrawl.Utils {
             }
         }
 
-        public static void DeleteDirectory(SharedBrawlURI uri) {
+        public static void DeleteDirectory(TimiSharedURI uri) {
             if (uri.BasePathType == FileBasePathType.LocalDataPath ||
                 uri.BasePathType == FileBasePathType.LocalPersistentDataPath ||
                 (uri.BasePathType == FileBasePathType.LocalStreamingAssetsPath && Application.isEditor)) {
@@ -52,7 +52,7 @@ namespace SharedBrawl.Utils {
 
         }
 
-        public static void CreateDirectory(SharedBrawlURI uri) {
+        public static void CreateDirectory(TimiSharedURI uri) {
             if (uri.BasePathType == FileBasePathType.LocalDataPath ||
                 uri.BasePathType == FileBasePathType.LocalPersistentDataPath ||
                 (uri.BasePathType == FileBasePathType.LocalStreamingAssetsPath && Application.isEditor)) {
@@ -67,21 +67,21 @@ namespace SharedBrawl.Utils {
 
         }
 
-        public static List<SharedBrawlURI> GetDirectoriesInDirectory(SharedBrawlURI directoryUri) {
+        public static List<TimiSharedURI> GetDirectoriesInDirectory(TimiSharedURI directoryUri) {
             string[] directoryPathNames = Directory.GetDirectories(directoryUri.GetFullPath());
-            List<SharedBrawlURI> directoryURIs = new List<SharedBrawlURI>();
+            List<TimiSharedURI> directoryURIs = new List<TimiSharedURI>();
 
             for (int i = 0; i < directoryPathNames.Length; ++i) {
                 string directoryName = Path.GetFileName(directoryPathNames[i]);
-                directoryURIs.Add(new SharedBrawlURI(directoryUri.BasePathType, Path.Combine(directoryUri.RelativePath, directoryName)));
+                directoryURIs.Add(new TimiSharedURI(directoryUri.BasePathType, Path.Combine(directoryUri.RelativePath, directoryName)));
             }
 
             return directoryURIs;
         }
 
-        public static List<SharedBrawlURI> GetFilesInDirectory(SharedBrawlURI directoryUri) {
+        public static List<TimiSharedURI> GetFilesInDirectory(TimiSharedURI directoryUri) {
             string[] filePathNames = Directory.GetFiles(directoryUri.GetFullPath());
-            List<SharedBrawlURI> fileURIs = new List<SharedBrawlURI>();
+            List<TimiSharedURI> fileURIs = new List<TimiSharedURI>();
 
             for (int i = 0; i < filePathNames.Length; ++i) {
                 string fileName = Path.GetFileName(filePathNames[i]);
@@ -90,13 +90,13 @@ namespace SharedBrawl.Utils {
                     // Skip Unity meta files and mac DS_Store files
                     continue;
                 }
-                fileURIs.Add(new SharedBrawlURI(directoryUri.BasePathType, Path.Combine(directoryUri.RelativePath, fileName)));
+                fileURIs.Add(new TimiSharedURI(directoryUri.BasePathType, Path.Combine(directoryUri.RelativePath, fileName)));
             }
 
             return fileURIs;
         }
 
-        public static IEnumerator CopyDirectoryContents(SharedBrawlURI sourceDirectory, SharedBrawlURI destinationDirectory) {
+        public static IEnumerator CopyDirectoryContents(TimiSharedURI sourceDirectory, TimiSharedURI destinationDirectory) {
             if (destinationDirectory.BasePathType == FileBasePathType.LocalDataPath ||
                 destinationDirectory.BasePathType == FileBasePathType.LocalPersistentDataPath ||
                 (destinationDirectory.BasePathType == FileBasePathType.LocalStreamingAssetsPath && Application.isEditor)) {
@@ -111,15 +111,15 @@ namespace SharedBrawl.Utils {
                     FileUtils.CreateDirectory(destinationDirectory);
                 }
 
-                List<SharedBrawlURI> fileURIs = FileUtils.GetFilesInDirectory(sourceDirectory);
-                List<SharedBrawlURI> directoryURIs = FileUtils.GetDirectoriesInDirectory(sourceDirectory);
+                List<TimiSharedURI> fileURIs = FileUtils.GetFilesInDirectory(sourceDirectory);
+                List<TimiSharedURI> directoryURIs = FileUtils.GetDirectoriesInDirectory(sourceDirectory);
 
                 for (int i = 0; i < fileURIs.Count; ++i) {
                     // TODO: Make this parallel for all the files
                     yield return FileUtils.CopyFile(fileURIs[i], destinationDirectory);
                 }
                 for (int i = 0; i < directoryURIs.Count; ++i) {
-                    SharedBrawlURI destination = new SharedBrawlURI(destinationDirectory.BasePathType,
+                    TimiSharedURI destination = new TimiSharedURI(destinationDirectory.BasePathType,
                             Path.Combine(destinationDirectory.RelativePath, directoryURIs[i].FileName));
                     // TODO: Make this parallel for all the files
                     yield return FileUtils.CopyDirectoryContents(directoryURIs[i], destination);
@@ -134,7 +134,7 @@ namespace SharedBrawl.Utils {
             }
         }
 
-        public static IEnumerator CopyFile(SharedBrawlURI sourceFileURI, SharedBrawlURI destinationDirectoryURI) {
+        public static IEnumerator CopyFile(TimiSharedURI sourceFileURI, TimiSharedURI destinationDirectoryURI) {
             if (destinationDirectoryURI.BasePathType == FileBasePathType.LocalDataPath ||
                 destinationDirectoryURI.BasePathType == FileBasePathType.LocalPersistentDataPath ||
                 (destinationDirectoryURI.BasePathType == FileBasePathType.LocalStreamingAssetsPath && Application.isEditor)) {
@@ -145,7 +145,7 @@ namespace SharedBrawl.Utils {
                     yield return fileLoadRequest;
                     string contents = FileUtils.GetStreamContents(fileLoadRequest.LoadedFileStream);
 
-                    SharedBrawlURI destinationFileURI = new SharedBrawlURI(destinationDirectoryURI.BasePathType,
+                    TimiSharedURI destinationFileURI = new TimiSharedURI(destinationDirectoryURI.BasePathType,
                             Path.Combine(destinationDirectoryURI.RelativePath, sourceFileURI.FileName));
                     using (Stream destinationFileStream = FileLoader.GetFileStreamSync(destinationFileURI, FileMode.Create, FileAccess.Write)) {
                         if (destinationFileStream != null) {
@@ -178,7 +178,7 @@ namespace SharedBrawl.Utils {
             stream.Flush();
         }
 
-        public static void WriteFile(SharedBrawlURI fileURI, string contents) {
+        public static void WriteFile(TimiSharedURI fileURI, string contents) {
             using (Stream fileStream = FileLoader.GetFileStreamSync(fileURI, FileMode.Create, FileAccess.ReadWrite)) {
                 using (StreamWriter streamWriter = new StreamWriter(fileStream)) {
 

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Reflection;
-using SharedBrawl.Debug;
+using TimiShared.Debug;
 using UnityEngine;
 
-namespace SharedBrawl.Extensions {
+namespace TimiShared.Extensions {
     public static class Extensions {
 
         /*

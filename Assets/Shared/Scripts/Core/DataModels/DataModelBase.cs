@@ -1,5 +1,5 @@
 using Newtonsoft.Json;
-using SharedBrawl.Persister;
+using TimiShared.Persister;
 
 [System.Serializable]
 public abstract class DataModelBase : IPersistable {

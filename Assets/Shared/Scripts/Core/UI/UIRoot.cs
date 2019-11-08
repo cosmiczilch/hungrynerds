@@ -1,8 +1,8 @@
-using SharedBrawl.Debug;
-using SharedBrawl.Extensions;
+using TimiShared.Debug;
+using TimiShared.Extensions;
 using UnityEngine;
 
-namespace SharedBrawl.UI {
+namespace TimiShared.UI {
     public class UIRoot : MonoBehaviour {
 
         #region Singleton
@@ -14,28 +14,28 @@ namespace SharedBrawl.UI {
         }
         #endregion
 
-        [SerializeField] private Canvas _mainCanvas;
+        [SerializeField] private Canvas _mainCanvas = null;
         public Canvas MainCanvas {
             get {
                 return this._mainCanvas;
             }
         }
 
-        [SerializeField] private Camera _uiCamera;
+        [SerializeField] private Camera _uiCamera = null;
         public Camera UICamera {
             get {
                 return this._uiCamera;
             }
         }
 
-        [SerializeField] private DialogFactory _dialogFactory;
+        [SerializeField] private DialogFactory _dialogFactory = null;
         public DialogFactory DialogFactory {
             get {
                 return this._dialogFactory;
             }
         }
 
-        [SerializeField] private DialogViewPool _dialogViewPool;
+        [SerializeField] private DialogViewPool _dialogViewPool = null;
         public DialogViewPool DialogViewPool {
             get {
                 return this._dialogViewPool;

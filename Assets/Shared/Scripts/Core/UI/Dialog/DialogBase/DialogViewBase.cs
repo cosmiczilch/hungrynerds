@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SharedBrawl.UI {
+namespace TimiShared.UI {
     public class DialogViewBase : MonoBehaviour {
 
         private string _prefabPath;

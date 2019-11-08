@@ -1,5 +1,5 @@
 using System.Collections;
-using SharedBrawl.Extensions;
+using TimiShared.Extensions;
 using UnityEngine;
 
 public class CoroutineHelper : MonoBehaviour {

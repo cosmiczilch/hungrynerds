@@ -1,4 +1,4 @@
-namespace SharedBrawl.Instance {
+namespace TimiShared.Instance {
     public interface IInstance {
     }
 }

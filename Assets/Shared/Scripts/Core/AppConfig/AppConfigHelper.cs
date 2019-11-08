@@ -1,18 +1,18 @@
 using System;
 using System.IO;
-using SharedBrawl.Loading;
-using SharedBrawl.Utils;
+using TimiShared.Loading;
+using TimiShared.Utils;
 using UnityEngine;
 
 public static class AppConfigHelper {
 
     private static string kAppConfigFileName = "AppConfig.json";
 
-    private static SharedBrawlURI _appConfigFileURI = null;
-    public static SharedBrawlURI AppConfigFileURI {
+    private static TimiSharedURI _appConfigFileURI = null;
+    public static TimiSharedURI AppConfigFileURI {
         get {
             if (_appConfigFileURI == null) {
-                _appConfigFileURI = new SharedBrawlURI(FileBasePathType.LocalDataPath, "Resources/BootstrapData/" + kAppConfigFileName);
+                _appConfigFileURI = new TimiSharedURI(FileBasePathType.LocalDataPath, "Resources/BootstrapData/" + kAppConfigFileName);
             }
             return _appConfigFileURI;
         }
@@ -23,7 +23,7 @@ public static class AppConfigHelper {
 
         string appConfigDataJson = textAsset.text;
         if (!string.IsNullOrEmpty(appConfigDataJson)) {
-            appConfigData = SharedBrawlSerializer.Deserialize<AppConfigData>(appConfigDataJson);
+            appConfigData = TimiSharedSerializer.Deserialize<AppConfigData>(appConfigDataJson);
         }
 
         return appConfigData;
@@ -34,9 +34,9 @@ public static class AppConfigHelper {
             throw new NotImplementedException("Not yet supported to edit app config on device");
         }
 
-        string appConfigDataJson = SharedBrawlSerializer.Serialize(appConfigData);
+        string appConfigDataJson = TimiSharedSerializer.Serialize(appConfigData);
         if (!string.IsNullOrEmpty(appConfigDataJson)) {
-            SharedBrawlURI appConfigFileUri = AppConfigHelper.AppConfigFileURI;
+            TimiSharedURI appConfigFileUri = AppConfigHelper.AppConfigFileURI;
             using (Stream appConfigFileStream = FileLoader.GetFileStreamSync(appConfigFileUri, FileMode.Create, FileAccess.Write)) {
                 FileUtils.PutStreamContents(appConfigFileStream, appConfigDataJson);
                 appConfigFileStream.Close();

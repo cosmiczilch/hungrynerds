@@ -1,14 +1,14 @@
 using System.Collections;
 using System.IO;
-using SharedBrawl.Debug;
-using SharedBrawl.Init;
-using SharedBrawl.Loading;
-using SharedBrawl.Instance;
+using TimiShared.Debug;
+using TimiShared.Init;
+using TimiShared.Loading;
+using TimiShared.Instance;
 using UnityEngine;
 
 public class AppConfig : MonoBehaviour, IInitializable, IInstance {
 
-    [SerializeField] private TextAsset _appConfigTextAsset;
+    [SerializeField] private TextAsset _appConfigTextAsset = null;
 
     public static AppConfig Instance {
         get {
@@ -30,7 +30,7 @@ public class AppConfig : MonoBehaviour, IInitializable, IInstance {
     public int GetAppID() {
         return _appConfigData.appID;
     }
-    
+
     public Environment GetCurrentEnvironment() {
         if (_appConfigData == null) {
             DebugLog.LogErrorColor("AppConfig not set", LogColor.red);
@@ -49,7 +49,7 @@ public class AppConfig : MonoBehaviour, IInitializable, IInstance {
 
         return null;
     }
-    
+
     public string GetRoomServerUrl() {
         switch (this.GetCurrentEnvironment()) {
             case Environment.LOCAL: return "ws://localhost:8001/" + _appConfigData.roomServerEndpoint + "/";
