@@ -32,7 +32,7 @@ public class AppSceneManager : IInstance {
         });
     }
 
-    public void LoadGameScene(GameController.GameType gameType) {
+    public void LoadGameScene(GameController.GameType_t gameType) {
         LoadingScreenManager.Instance.ShowLoadingScreen(true, false);
 
         this.LoadScene(AppScene.GAME_SCENE, (success) => {

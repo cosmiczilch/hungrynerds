@@ -18,7 +18,7 @@ namespace Lobby {
         }
 
         private void HandleSinglePlayerButtonClicked() {
-            this.StartGame(GameController.GameType.SINGLE_PLAYER);
+            this.StartGame(GameController.GameType_t.SINGLE_PLAYER);
         }
 
         private void HandleMultiPlayerButtonClicked() {
@@ -29,7 +29,7 @@ namespace Lobby {
         private void HandleRoomJoined() {
             this.View.SetState(UILobbyView.State.FindingMatch);
             CoroutineHelper.Instance.RunCoroutine(this.WaitForOtherPlayer(() => {
-                                                                              this.StartGame(GameController.GameType.MULTI_PLAYER);
+                                                                              this.StartGame(GameController.GameType_t.MULTI_PLAYER);
                                                                           },
                                                                           this.HandleTimeoutWaitingForMatch,
                                                                           AppConstants.kWaitForMatchTimeoutSeconds));
@@ -72,7 +72,7 @@ namespace Lobby {
             }
         }
 
-        private void StartGame(GameController.GameType gameType) {
+        private void StartGame(GameController.GameType_t gameType) {
             DebugLog.LogColor("Starting game: " + gameType.ToString(), LogColor.green);
             AppSceneManager.Instance.LoadGameScene(gameType);
             this.RemoveDialog();

@@ -1,6 +1,7 @@
 using Photon.Pun;
 using Photon.Realtime;
 using TimiShared.Debug;
+using TimiShared.Extensions;
 using TimiShared.Init;
 using TimiShared.Instance;
 using UnityEngine;
@@ -95,6 +96,19 @@ namespace TimiMultiPlayer {
                 return true;
             }
             return false;
+        }
+
+        public GameObject InstantiatePrefab(string prefabPath, Transform parent = null) {
+            if (!PhotonNetwork.IsConnected) {
+                DebugLog.LogErrorColor("Network instantiate attempted without connection", LogColor.yellow);
+            }
+            GameObject go = PhotonNetwork.Instantiate(prefabPath, Vector3.zero, Quaternion.identity);
+            go.AssertNotNull("Instantiate game object");
+            if (parent != null) {
+                go.transform.SetParent(parent, worldPositionStays: false);
+            }
+
+            return go;
         }
         #endregion
 
