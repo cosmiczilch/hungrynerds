@@ -26,7 +26,7 @@ namespace TimiMultiPlayer {
         public void StartInitialize() {
             InstanceLocator.RegisterInstance<MultiPlayerManager>(this);
 
-            PhotonNetwork.AutomaticallySyncScene = true;
+            // PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.GameVersion = kGameMultiPlayerVersion;
             PhotonNetwork.NickName = SystemInfo.operatingSystem;
 

@@ -23,11 +23,14 @@ public class AppSceneManager : IInstance {
     private const string kGameSceneName = "GameScene";
 
     #region Public API
-    public void LoadLobbyScene(System.Action callback) {
+    public void LoadLobbyScene(System.Action callback = null) {
         this.LoadScene(AppScene.LOBBY_SCENE, (success) => {
             if (success) {
                 UILobbyController lobbyController = new UILobbyController();
                 lobbyController.PresentDialog();
+                if (callback != null) {
+                    callback.Invoke();
+                }
             }
         });
     }
