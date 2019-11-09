@@ -26,7 +26,10 @@ namespace TimiMultiPlayer {
         public void StartInitialize() {
             InstanceLocator.RegisterInstance<MultiPlayerManager>(this);
 
+            // Do NOT automatically sync scene as that causes weird effects
+            // when playing across devices with drastically different processing speeds
             // PhotonNetwork.AutomaticallySyncScene = true;
+
             PhotonNetwork.GameVersion = kGameMultiPlayerVersion;
             PhotonNetwork.NickName = SystemInfo.operatingSystem;
 
@@ -102,10 +105,13 @@ namespace TimiMultiPlayer {
             if (!PhotonNetwork.IsConnected) {
                 DebugLog.LogErrorColor("Network instantiate attempted without connection", LogColor.yellow);
             }
-            GameObject go = PhotonNetwork.Instantiate(prefabPath, Vector3.zero, Quaternion.identity);
+
+            GameObject go = PhotonNetwork.Instantiate(prefabPath,
+                                                      parent == null ? Vector3.zero : parent.transform.position,
+                                                      parent == null ? Quaternion.identity : parent.transform.rotation);
             go.AssertNotNull("Instantiate game object");
             if (parent != null) {
-                go.transform.SetParent(parent, worldPositionStays: false);
+                go.transform.SetParent(parent, worldPositionStays: true);
             }
 
             return go;

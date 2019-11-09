@@ -1,5 +1,6 @@
 using TimiShared.Init;
 using TimiShared.Instance;
+using UnityEngine;
 
 public class AppInit : AppInitBase {
 
@@ -11,6 +12,8 @@ public class AppInit : AppInitBase {
     private bool _isFullyInitialized = false;
 
     public override void StartInitialize() {
+
+        Application.targetFrameRate = 30;
 
         AppSceneManager appSceneManager = new AppSceneManager();
         InstanceLocator.RegisterInstance<AppSceneManager>(appSceneManager);
