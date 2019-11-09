@@ -1,3 +1,4 @@
+using Game;
 using Init;
 using Lobby;
 using TimiShared.Debug;
@@ -31,14 +32,16 @@ public class AppSceneManager : IInstance {
         });
     }
 
-    public void LoadGameScene() {
+    public void LoadGameScene(GameController.GameType gameType) {
         LoadingScreenManager.Instance.ShowLoadingScreen(true, false);
 
         this.LoadScene(AppScene.GAME_SCENE, (success) => {
             if (success) {
+                GameController gameController = new GameController(new GameController.Config {
+                    gameType = gameType
+                });
             }
         });
-
     }
     #endregion
 

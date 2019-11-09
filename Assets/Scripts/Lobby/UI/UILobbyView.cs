@@ -10,7 +10,8 @@ namespace Lobby {
         [SerializeField] private Transform _findingMatchContainer = null;
         [SerializeField] private Transform _timedOutContainer = null;
 
-        private System.Action _onPlayButtonCallback;
+        private System.Action _onSinglePlayerButtonCallback;
+        private System.Action _onMultiPlayerButtonCallback;
 
         public enum State {
             Idle,
@@ -20,8 +21,9 @@ namespace Lobby {
         }
         private State _state;
 
-        public void Configure(System.Action onPlayButtonCallback) {
-            this._onPlayButtonCallback = onPlayButtonCallback;
+        public void Configure(System.Action onSinglePlayerButtonCallback, System.Action onMultiPlayerButtonCallback) {
+            this._onSinglePlayerButtonCallback = onSinglePlayerButtonCallback;
+            this._onMultiPlayerButtonCallback = onMultiPlayerButtonCallback;
             this._state = State.Idle;
             this.UpdateState();
         }
@@ -63,9 +65,15 @@ namespace Lobby {
             }
         }
 
-        public void OnPlayButtonClicked() {
-            if (this._onPlayButtonCallback != null) {
-                this._onPlayButtonCallback.Invoke();
+        public void OnSinglePlayerButtonClicked() {
+            if (this._onSinglePlayerButtonCallback != null) {
+                this._onSinglePlayerButtonCallback.Invoke();
+            }
+        }
+
+        public void OnMultiPlayerButtonClicked() {
+            if (this._onMultiPlayerButtonCallback != null) {
+                this._onMultiPlayerButtonCallback.Invoke();
             }
         }
     }

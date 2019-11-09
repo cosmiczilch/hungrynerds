@@ -88,6 +88,14 @@ namespace TimiMultiPlayer {
                 return 0;
             }
         }
+
+        public bool AreWePlayer1() {
+            if (PhotonNetwork.IsConnected && PhotonNetwork.LocalPlayer != null &&
+                PhotonNetwork.IsMasterClient) {
+                return true;
+            }
+            return false;
+        }
         #endregion
 
         #region Photon callbacks

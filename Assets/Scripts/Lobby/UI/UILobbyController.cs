@@ -1,4 +1,5 @@
 using System.Collections;
+using Game;
 using TimiMultiPlayer;
 using TimiShared.Debug;
 using TimiShared.UI;
@@ -13,17 +14,23 @@ namespace Lobby {
         }
 
         protected override void ConfigureView() {
-            this.View.Configure(this.HandlePlayButtonClicked);
+            this.View.Configure(this.HandleSinglePlayerButtonClicked, this.HandleMultiPlayerButtonClicked);
         }
 
-        private void HandlePlayButtonClicked() {
+        private void HandleSinglePlayerButtonClicked() {
+            this.StartGame(GameController.GameType.SINGLE_PLAYER);
+        }
+
+        private void HandleMultiPlayerButtonClicked() {
             this.View.SetState(UILobbyView.State.Connecting);
             MultiPlayerManager.Instance.CreateOrJoinRandomRoom(this.HandleRoomJoined, this.HandleRoomJoinFailed);
         }
 
         private void HandleRoomJoined() {
             this.View.SetState(UILobbyView.State.FindingMatch);
-            CoroutineHelper.Instance.RunCoroutine(this.WaitForOtherPlayer(this.StartGame,
+            CoroutineHelper.Instance.RunCoroutine(this.WaitForOtherPlayer(() => {
+                                                                              this.StartGame(GameController.GameType.MULTI_PLAYER);
+                                                                          },
                                                                           this.HandleTimeoutWaitingForMatch,
                                                                           AppConstants.kWaitForMatchTimeoutSeconds));
         }
@@ -65,9 +72,9 @@ namespace Lobby {
             }
         }
 
-        private void StartGame() {
-            DebugLog.LogColor("Starting game", LogColor.green);
-            AppSceneManager.Instance.LoadGameScene();
+        private void StartGame(GameController.GameType gameType) {
+            DebugLog.LogColor("Starting game: " + gameType.ToString(), LogColor.green);
+            AppSceneManager.Instance.LoadGameScene(gameType);
             this.RemoveDialog();
         }
     }
