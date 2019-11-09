@@ -73,6 +73,13 @@ namespace TimiMultiPlayer {
             }
         }
 
+        public void LeaveRoom() {
+            this._pendingRoomJoinRequest = null;
+            if (PhotonNetwork.IsConnected && PhotonNetwork.CurrentRoom != null) {
+                PhotonNetwork.LeaveRoom();
+            }
+        }
+
         public int NumPlayersInRoom {
             get {
                 if (PhotonNetwork.IsConnected && PhotonNetwork.CurrentRoom != null) {
