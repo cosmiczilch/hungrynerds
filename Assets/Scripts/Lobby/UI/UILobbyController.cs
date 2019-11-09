@@ -67,6 +67,8 @@ namespace Lobby {
 
         private void StartGame() {
             DebugLog.LogColor("Starting game", LogColor.green);
+            AppSceneManager.Instance.LoadGameScene();
+            this.RemoveDialog();
         }
     }
 }

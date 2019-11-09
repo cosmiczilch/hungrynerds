@@ -5,10 +5,10 @@ namespace Lobby {
 
     public class UILobbyView : DialogViewBase {
 
-        [SerializeField] private Transform _loadingContainer;
-        [SerializeField] private Transform _connectingContainer;
-        [SerializeField] private Transform _findingMatchContainer;
-        [SerializeField] private Transform _timedOutContainer;
+        [SerializeField] private Transform _loadingContainer = null;
+        [SerializeField] private Transform _connectingContainer = null;
+        [SerializeField] private Transform _findingMatchContainer = null;
+        [SerializeField] private Transform _timedOutContainer = null;
 
         private System.Action _onPlayButtonCallback;
 
