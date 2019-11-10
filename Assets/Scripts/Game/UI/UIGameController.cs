@@ -35,15 +35,33 @@ namespace Game.UI {
             this.RemoveDialog();
         }
 
+        #region Drag to launch
+        private const float kMinDragDistance = 0.0f;
+        private const float kMaxDragDistance = 100.0f;
+
         private void HandleDragToLaunchStarted() {
-            DebugLog.LogColor("start", LogColor.green);
+            if (this._gameController != null && this._gameController.PlayerUs != null) {
+                this._gameController.PlayerUs.HandleDragToLaunchStarted();
+            }
         }
 
         private void HandleDragToLaunchMoved(Vector2 delta) {
+            float distance = delta.magnitude;
+            float normalized = Mathf.InverseLerp(kMinDragDistance, kMaxDragDistance, distance);
+            float angle = Vector2.SignedAngle(new Vector2(-1, 0), delta.normalized);
+            if (this._gameController != null && this._gameController.PlayerUs != null) {
+                this._gameController.PlayerUs.HandleDragToLaunchMoved(normalized, angle);
+            }
         }
 
         private void HandleDragToLaunchEnded(Vector2 delta) {
-            DebugLog.LogColor("end: " + delta, LogColor.red);
+            float distance = delta.magnitude;
+            float normalized = Mathf.InverseLerp(kMinDragDistance, kMaxDragDistance, distance);
+            float angle = Vector2.SignedAngle(new Vector2(-1, 0), delta.normalized);
+            if (this._gameController != null && this._gameController.PlayerUs != null) {
+                this._gameController.PlayerUs.HandleDragToLaunchEnded(normalized, angle);
+            }
         }
+        #endregion
     }
 }

@@ -1,5 +1,6 @@
 using Photon.Pun;
 using TimiMultiPlayer;
+using TimiShared.Debug;
 using TimiShared.Extensions;
 using TimiShared.Loading;
 using UnityEngine;
@@ -50,5 +51,18 @@ namespace Game {
                 this.View.AssertNotNull("Player view component");
             }
         }
+
+        public void HandleDragToLaunchStarted() {
+            this.View.ShowLaunchArrow();
+        }
+
+        public void HandleDragToLaunchMoved(float normalizedStrength, float angle) {
+            this.View.ShowLaunchArrow(normalizedStrength, angle);
+        }
+
+        public void HandleDragToLaunchEnded(float normalizedStrength, float angle) {
+            this.View.HideLaunchIndicatorArrow();
+        }
+
     }
 }
