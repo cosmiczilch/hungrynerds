@@ -61,7 +61,7 @@ namespace Game {
 
         protected virtual void Update() {
             if (this._currentHealth <= 0) {
-                GameObject.Destroy(this.gameObject);
+                this.MarkAsDead();
                 return;
             }
 
@@ -91,7 +91,47 @@ namespace Game {
             }
         }
 
+        private bool _isDead = false;
+        private void MarkAsDead() {
+            if (this._isDead) {
+                return;
+            }
+            this._isDead = true;
+
+            if (this._damageStates != null && this._damageStates.Count > 0) {
+                // Turn off all the damage state containers
+                {
+                    var enumerator = this._damageStates.GetEnumerator();
+                    while (enumerator.MoveNext()) {
+                        enumerator.Current.damageStateContainer.gameObject.SetActive(false);
+                    }
+                    enumerator.Dispose();
+                }
+            }
+
+            Rigidbody2D[] rigidbody2Ds = this.gameObject.GetComponentsInChildren<Rigidbody2D>();
+            if (rigidbody2Ds != null) {
+                for (int i = 0; i < rigidbody2Ds.Length; ++i) {
+                    GameObject.Destroy(rigidbody2Ds[i]);
+                }
+            }
+
+            Collider2D[] collider2Ds = this.gameObject.GetComponentsInChildren<Collider2D>();
+            if (collider2Ds != null) {
+                for (int i = 0; i < collider2Ds.Length; ++i) {
+                    GameObject.Destroy(collider2Ds[i]);
+                }
+            }
+
+
+        }
+
         private void OnCollisionEnter2D(Collision2D col) {
+            if (GameController.Instance.GameType == GameController.GameType_t.MULTI_PLAYER &&
+                !this._photonView.IsMine) {
+                return;
+            }
+
             if (col.gameObject == null) {
                 return;
             }
