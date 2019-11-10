@@ -97,6 +97,20 @@ namespace Game {
             AppSceneManager.Instance.LoadLobbyScene();
         }
 
+        private const string kLayerNamePlayer1 = "GameScenePlayer1";
+        private const string kLayerNamePlayer2 = "GameScenePlayer2";
+
+        public int GetLayer(bool isUnderLocalControl) {
+            string layerName = kLayerNamePlayer1;
+            if (this.GameType == GameType_t.MULTI_PLAYER) {
+                if (isUnderLocalControl != MultiPlayerManager.Instance.AreWePlayer1()) {
+                    layerName = kLayerNamePlayer2;
+                }
+            }
+
+            return LayerMask.NameToLayer(layerName);
+        }
+
         private void CreateView() {
             GameObject go = PrefabLoader.Instance.InstantiateSynchronous(kGameViewPrefabPath);
             go.AssertNotNull("Game View Prefab");
