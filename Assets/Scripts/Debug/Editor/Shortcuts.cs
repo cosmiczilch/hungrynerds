@@ -25,6 +25,11 @@ namespace Debug {
             SwitchScene("Assets/Scenes/GameScene.unity");
         }
 
+        [MenuItem("HungryNerds/Shortcuts/Switch to Test scene #&5")]
+        static void SwitchToTestScene() {
+            SwitchScene("Assets/Scenes/TestScene.unity");
+        }
+
         private static void SwitchScene(string sceneName) {
             EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
             EditorSceneManager.OpenScene(sceneName);

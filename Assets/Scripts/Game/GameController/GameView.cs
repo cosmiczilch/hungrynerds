@@ -17,6 +17,20 @@ namespace Game {
             get { return this._player2Anchor; }
         }
 
+        [SerializeField] private Transform _destructiblePile1Anchor = null;
+        public Transform DestructiblePile1Anchor {
+            get {
+                return this._destructiblePile1Anchor;
+            }
+        }
+
+        [SerializeField] private Transform _destructiblePile2Anchor = null;
+        public Transform DestructiblePile2Anchor {
+            get {
+                return this._destructiblePile2Anchor;
+            }
+        }
+
         public void FlipCameraHorizontal() {
             this._gameCameraFlipper.AssertNotNull("Game Camera Flipper");
             this._gameCameraFlipper.FlipCamera(CameraFlip.FlipDirection.Horizontal);

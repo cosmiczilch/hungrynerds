@@ -43,6 +43,10 @@ namespace Game {
             get; private set;
         }
 
+        public DestructiblePile DestructiblePileUs {
+            get; private set;
+        }
+
         public GameType_t GameType {
             get {
                 if (this._config != null) {
@@ -82,6 +86,8 @@ namespace Game {
             }
             this.PlayerUs.CreateView(playerUsAnchor);
             // Don't create view for other player as it will be synced over the network
+
+            this.CreateDestructiblePile();
         }
 
         public void LeaveGame() {
@@ -106,6 +112,24 @@ namespace Game {
 
             this.UIController = new UIGameController(this);
             this.UIController.PresentDialog();
+        }
+
+        private void CreateDestructiblePile() {
+            // Create our destructible pile (other player's will be created by them and synced over the network)
+
+            string prefabPath = "Prefabs/GameScene/NetworkResources/Resources/DestructiblePile1";
+            GameObject destructiblePileGo = null;
+            if (this.GameType == GameType_t.SINGLE_PLAYER) {
+                destructiblePileGo = PrefabLoader.Instance.InstantiateSynchronous(prefabPath, this.View.DestructiblePile1Anchor);
+            } else {
+                Transform anchor = MultiPlayerManager.Instance.AreWePlayer1() ? this.View.DestructiblePile1Anchor
+                                                                              : this.View.DestructiblePile2Anchor;
+                destructiblePileGo = MultiPlayerManager.Instance.InstantiatePrefab(prefabPath, anchor);
+            }
+            destructiblePileGo.AssertNotNull("Destructible pile game object");
+
+            DestructiblePile destructiblePile = destructiblePileGo.GetComponent<DestructiblePile>();
+            destructiblePile.AssertNotNull("Destructible pile component");
         }
 
     }
