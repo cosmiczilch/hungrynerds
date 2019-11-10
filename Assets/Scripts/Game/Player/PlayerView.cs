@@ -1,9 +1,16 @@
+using TimiMultiPlayer;
 using UnityEngine;
 
 namespace Game {
     public class PlayerView : MonoBehaviour {
 
         [SerializeField] private Transform _launchPosition;
+        public Transform LaunchPosition {
+            get {
+                return this._launchPosition;
+            }
+        }
+
         [SerializeField] private Transform _launchIndicatorArrow;
 
         private void Awake() {

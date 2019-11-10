@@ -4,11 +4,18 @@ using Photon.Pun;
 using TimiMultiPlayer;
 using TimiShared.Debug;
 using TimiShared.Extensions;
+using TimiShared.Instance;
 using TimiShared.Loading;
 using UnityEngine;
 
 namespace Game {
-    public class GameController {
+    public class GameController : IInstance {
+
+        public static GameController Instance {
+            get {
+                return InstanceLocator.Instance<GameController>();
+            }
+        }
 
         public enum GameType_t {
             SINGLE_PLAYER,
@@ -49,7 +56,14 @@ namespace Game {
 
         private const string kGameViewPrefabPath = "Prefabs/GameScene/RootGameView";
 
+        // Required for IInstance
+        public GameController() {
+            InstanceLocator.RegisterInstance<GameController>(this);
+        }
+
         public GameController(Config config) {
+            InstanceLocator.RegisterInstance<GameController>(this);
+
             this._config = config;
 
             this.PlayerUs = new Player(this, Player.PlayerType_t.Us);

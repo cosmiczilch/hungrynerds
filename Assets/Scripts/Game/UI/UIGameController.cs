@@ -1,3 +1,4 @@
+using TimiMultiPlayer;
 using TimiShared.Debug;
 using TimiShared.UI;
 using UnityEngine;
@@ -48,7 +49,12 @@ namespace Game.UI {
         private void HandleDragToLaunchMoved(Vector2 delta) {
             float distance = delta.magnitude;
             float normalized = Mathf.InverseLerp(kMinDragDistance, kMaxDragDistance, distance);
-            float angle = Vector2.SignedAngle(new Vector2(-1, 0), delta.normalized);
+            float angle = Vector2.SignedAngle(Vector2.left, delta.normalized);
+            if (this._gameController.GameType == GameController.GameType_t.MULTI_PLAYER &&
+                !MultiPlayerManager.Instance.AreWePlayer1()) {
+                angle = 180 - angle;
+            }
+
             if (this._gameController != null && this._gameController.PlayerUs != null) {
                 this._gameController.PlayerUs.HandleDragToLaunchMoved(normalized, angle);
             }
@@ -57,7 +63,12 @@ namespace Game.UI {
         private void HandleDragToLaunchEnded(Vector2 delta) {
             float distance = delta.magnitude;
             float normalized = Mathf.InverseLerp(kMinDragDistance, kMaxDragDistance, distance);
-            float angle = Vector2.SignedAngle(new Vector2(-1, 0), delta.normalized);
+            float angle = Vector2.SignedAngle(Vector2.left, delta.normalized);
+            if (this._gameController.GameType == GameController.GameType_t.MULTI_PLAYER &&
+                !MultiPlayerManager.Instance.AreWePlayer1()) {
+                angle = 180 - angle;
+            }
+
             if (this._gameController != null && this._gameController.PlayerUs != null) {
                 this._gameController.PlayerUs.HandleDragToLaunchEnded(normalized, angle);
             }
