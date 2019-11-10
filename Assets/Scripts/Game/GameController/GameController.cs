@@ -128,6 +128,12 @@ namespace Game {
             }
             destructiblePileGo.AssertNotNull("Destructible pile game object");
 
+            // Do this to make sure that the destructible piles are mirrors of each other
+            if (this.GameType == GameType_t.MULTI_PLAYER &&
+                !MultiPlayerManager.Instance.AreWePlayer1()) {
+                destructiblePileGo.transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
+            }
+
             DestructiblePile destructiblePile = destructiblePileGo.GetComponent<DestructiblePile>();
             destructiblePile.AssertNotNull("Destructible pile component");
         }
