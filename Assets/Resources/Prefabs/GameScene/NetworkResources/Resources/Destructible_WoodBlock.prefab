@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 1969687621318404306}
   - component: {fileID: 1969687621318404307}
   m_Layer: 0
-  m_Name: DestructibleWoodBlock
+  m_Name: Destructible_WoodBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -319,12 +319,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _photonView: {fileID: 1969687621318404304}
+  _destructibleType: 0
   _startingHealth: 10
   _currentHealth: 10
   _damageStates:
   - normalizedHealth: 0.8
     damageStateContainer: {fileID: 1969687621073618963}
-  - normalizedHealth: 0.4
+  - normalizedHealth: 0.3
     damageStateContainer: {fileID: 1172883723}
   - normalizedHealth: 0
     damageStateContainer: {fileID: 66540326}
@@ -347,6 +348,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1969687621318404305}
+  - {fileID: 1969687621318404303}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

@@ -1,10 +1,7 @@
 using System.Collections.Generic;
-using System.Threading;
 using Photon.Pun;
-using TimiShared.Debug;
 using TimiShared.Extensions;
 using UnityEngine;
-using UnityEngine.Assertions.Comparers;
 
 namespace Game {
     public class DestructibleBase : NetworkedObjectBase, IPunObservable {
@@ -16,8 +13,10 @@ namespace Game {
             }
         }
 
-        [SerializeField] protected float _startingHealth;
+        [SerializeField] private DestructiblePropertiesHelper.DestructibleType _destructibleType;
+
         // TODO: Remove serialized after testing
+        [SerializeField] protected float _startingHealth;
         [SerializeField] protected float _currentHealth;
 
 
@@ -31,11 +30,6 @@ namespace Game {
         protected Rigidbody2D _rigidbody2D;
 
         protected virtual void Start() {
-            if (this._startingHealth == 0) {
-                this._startingHealth = 1;
-            }
-            this._currentHealth = this._startingHealth;
-
             if (this._damageStates != null) {
                 this._damageStates.Sort((a, b) => {
                     if (a.normalizedHealth < b.normalizedHealth) {
@@ -55,6 +49,13 @@ namespace Game {
             } else {
                 this._rigidbody2D = this.GetComponent<Rigidbody2D>();
                 this._rigidbody2D.AssertNotNull("RigidBody2D component on destructible");
+            }
+
+            this._startingHealth = DestructiblePropertiesHelper.GetStartingHealthForType(this._destructibleType);
+            this._currentHealth = this._startingHealth;
+
+            if (this._rigidbody2D != null) {
+                this._rigidbody2D.mass = DestructiblePropertiesHelper.GetMassForType(this._destructibleType);
             }
         }
 
