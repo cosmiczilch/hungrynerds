@@ -17,6 +17,10 @@ namespace Game {
             WOOD_CIRCLE,
             ICE_CIRCLE,
             STONE_CIRCLE,
+            WOOD_PLANK,
+            ICE_PLANK,
+            STONE_PLANK,
+            STONE_HOLLOW_BLOCK,
         }
 
         public struct DestructibleProperties {
@@ -28,7 +32,7 @@ namespace Game {
             {DestructibleType.WOOD_BLOCK, new DestructibleProperties { startingHealth = 10, mass = 10 }},
             {DestructibleType.ICE_BLOCK, new DestructibleProperties { startingHealth = 8, mass = 15 }},
             {DestructibleType.STONE_BLOCK, new DestructibleProperties { startingHealth = 30, mass = 30 }},
-            {DestructibleType.WOOD_PILLAR, new DestructibleProperties { startingHealth = 15, mass = 10 }},
+            {DestructibleType.WOOD_PILLAR, new DestructibleProperties { startingHealth = 8, mass = 10 }},
             {DestructibleType.ICE_PILLAR, new DestructibleProperties { startingHealth = 5, mass = 15 }},
             {DestructibleType.STONE_PILLAR, new DestructibleProperties { startingHealth = 20, mass = 30 }},
             {DestructibleType.WOOD_TRIANGLE, new DestructibleProperties { startingHealth = 10, mass = 10 }},
@@ -36,6 +40,10 @@ namespace Game {
             {DestructibleType.WOOD_CIRCLE, new DestructibleProperties { startingHealth = 10, mass = 10 }},
             {DestructibleType.ICE_CIRCLE, new DestructibleProperties { startingHealth = 8, mass = 15 }},
             {DestructibleType.STONE_CIRCLE, new DestructibleProperties { startingHealth = 30, mass = 30 }},
+            {DestructibleType.WOOD_PLANK, new DestructibleProperties { startingHealth = 8, mass = 8 }},
+            {DestructibleType.ICE_PLANK, new DestructibleProperties { startingHealth = 5, mass = 10 }},
+            {DestructibleType.STONE_PLANK, new DestructibleProperties { startingHealth = 15, mass = 20 }},
+            {DestructibleType.STONE_HOLLOW_BLOCK, new DestructibleProperties { startingHealth = 10, mass = 15 }},
         };
 
         public static float GetStartingHealthForType(DestructibleType destructibleType) {
