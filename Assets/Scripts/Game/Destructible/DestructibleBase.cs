@@ -6,6 +6,8 @@ using UnityEngine;
 namespace Game {
     public class DestructibleBase : NetworkedObjectBase, IPunObservable {
 
+        private const float kMinImpulseForFiltering = 1.0f;
+
         [SerializeField] private PhotonView _photonView;
         protected override PhotonView PhotonView {
             get {
@@ -152,6 +154,9 @@ namespace Game {
         }
 
         private void ApplyCollisionImpulse(float impulseMagnitude) {
+            if (impulseMagnitude <= kMinImpulseForFiltering) {
+                return;
+            }
             this._currentHealth -= impulseMagnitude;
         }
 

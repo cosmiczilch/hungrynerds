@@ -27,8 +27,8 @@ namespace Game {
         private const string kPlayerViewPrefabPath = "Prefabs/GameScene/NetworkResources/Resources/PlayerView";
         private const string kProjectilePrefabPath = "Prefabs/GameScene/NetworkResources/Resources/Projectile";
 
-        private const float kForceMultiplierMin = 3000.0f;
-        private const float kForceMultiplierMax = 6000.0f;
+        private const float kForceMultiplierMin = 2500.0f;
+        private const float kForceMultiplierMax = 4000.0f;
 
         public Player(GameController gameController, PlayerType_t playerType) {
             this._gameController = gameController;
