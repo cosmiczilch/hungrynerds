@@ -79,6 +79,7 @@ namespace Game {
 
         private void LaunchCurrentProjectile(float normalizedStrength, float angle) {
             this._currentProjectile.AssertNotNull("Current projectile");
+            this._currentProjectile.MarkAsLaunched();
 
             Rigidbody2D rigidbody2D = this._currentProjectile.gameObject.GetComponent<Rigidbody2D>();
             rigidbody2D.AssertNotNull("RigidBody2D component");

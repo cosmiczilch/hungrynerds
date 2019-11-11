@@ -602,8 +602,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 1416123188799473930}
   _destructibleType: 13
-  _startingHealth: 15
-  _currentHealth: 15
   _damageStates:
   - normalizedHealth: 0.4
     damageStateContainer: {fileID: 1416123189648370121}
@@ -744,8 +742,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 1416123189103194823}
   _destructibleType: 13
-  _startingHealth: 15
-  _currentHealth: 14.872458
   _damageStates:
   - normalizedHealth: 0.4
     damageStateContainer: {fileID: 1416123189343900164}
@@ -1187,8 +1183,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 2050058689931156173}
   _destructibleType: 12
-  _startingHealth: 5
-  _currentHealth: 5
   _damageStates:
   - normalizedHealth: 0.4
     damageStateContainer: {fileID: 2050058690663660046}
@@ -1487,8 +1481,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 2371570617865982502}
   _destructibleType: 14
-  _startingHealth: 10
-  _currentHealth: 7.6464615
   _damageStates:
   - normalizedHealth: 0.3
     damageStateContainer: {fileID: 2371570617538245349}
@@ -1851,8 +1843,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 2555549979919653358}
   _destructibleType: 6
-  _startingHealth: 10
-  _currentHealth: 10
   _damageStates:
   - normalizedHealth: 0.4
     damageStateContainer: {fileID: 2555549979022670125}
@@ -3609,8 +3599,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 5341873079516509884}
   _destructibleType: 4
-  _startingHealth: 5
-  _currentHealth: 4.487067
   _damageStates:
   - normalizedHealth: 0.4
     damageStateContainer: {fileID: 5341873079259010687}
@@ -4179,8 +4167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 5978131519143909262}
   _destructibleType: 3
-  _startingHealth: 8
-  _currentHealth: 7.762831
   _damageStates:
   - normalizedHealth: 0.7
     damageStateContainer: {fileID: 5978131518363187021}
@@ -4481,8 +4467,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 6126220227929391147}
   _destructibleType: 3
-  _startingHealth: 8
-  _currentHealth: 4.4696937
   _damageStates:
   - normalizedHealth: 0.7
     damageStateContainer: {fileID: 6126220228141670632}
@@ -4770,8 +4754,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 6126220228612325905}
   _destructibleType: 3
-  _startingHealth: 8
-  _currentHealth: 8
   _damageStates:
   - normalizedHealth: 0.7
     damageStateContainer: {fileID: 6126220227735266002}
@@ -4993,8 +4975,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 6365014868387644084}
   _destructibleType: 12
-  _startingHealth: 5
-  _currentHealth: 4.863995
   _damageStates:
   - normalizedHealth: 0.4
     damageStateContainer: {fileID: 6365014868112335479}
@@ -5279,8 +5259,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 6382970079269063047}
   _destructibleType: 2
-  _startingHealth: 30
-  _currentHealth: 30
   _damageStates:
   - normalizedHealth: 0.8
     damageStateContainer: {fileID: 6382970078509312324}
@@ -5535,8 +5513,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 6874462600460254836}
   _destructibleType: 2
-  _startingHealth: 30
-  _currentHealth: 30
   _damageStates:
   - normalizedHealth: 0.8
     damageStateContainer: {fileID: 6874462601323814583}
@@ -5679,8 +5655,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 6874462600561242030}
   _destructibleType: 2
-  _startingHealth: 30
-  _currentHealth: 30
   _damageStates:
   - normalizedHealth: 0.8
     damageStateContainer: {fileID: 6874462600953859949}
@@ -6047,8 +6021,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 6874462600999497315}
   _destructibleType: 2
-  _startingHealth: 30
-  _currentHealth: 30
   _damageStates:
   - normalizedHealth: 0.8
     damageStateContainer: {fileID: 6874462600792460960}
@@ -6224,8 +6196,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 6874462601217421289}
   _destructibleType: 2
-  _startingHealth: 30
-  _currentHealth: 30
   _damageStates:
   - normalizedHealth: 0.8
     damageStateContainer: {fileID: 6874462600306659114}
@@ -6447,8 +6417,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 6874462601641637209}
   _destructibleType: 2
-  _startingHealth: 30
-  _currentHealth: 30
   _damageStates:
   - normalizedHealth: 0.8
     damageStateContainer: {fileID: 6874462602021803418}
@@ -6814,8 +6782,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 6892532092013084899}
   _destructibleType: 12
-  _startingHealth: 5
-  _currentHealth: 5
   _damageStates:
   - normalizedHealth: 0.4
     damageStateContainer: {fileID: 6892532091768184864}
@@ -7069,8 +7035,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 7030257213722909687}
   _destructibleType: 11
-  _startingHealth: 8
-  _currentHealth: 8
   _damageStates:
   - normalizedHealth: 0.4
     damageStateContainer: {fileID: 7030257213867162420}
@@ -7290,8 +7254,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 7030257214759386436}
   _destructibleType: 11
-  _startingHealth: 8
-  _currentHealth: 8
   _damageStates:
   - normalizedHealth: 0.4
     damageStateContainer: {fileID: 7030257214986460551}
@@ -7656,8 +7618,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 7377564244010310485}
   _destructibleType: 11
-  _startingHealth: 8
-  _currentHealth: 7.4795346
   _damageStates:
   - normalizedHealth: 0.4
     damageStateContainer: {fileID: 7377564244690254742}
@@ -7989,8 +7949,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 7408272728067923171}
   _destructibleType: 1
-  _startingHealth: 8
-  _currentHealth: 8
   _damageStates:
   - normalizedHealth: 0.7
     damageStateContainer: {fileID: 7408272727805197344}
@@ -8096,7 +8054,7 @@ GameObject:
   - component: {fileID: 4868287608989981759}
   - component: {fileID: 7000688686927206012}
   m_Layer: 8
-  m_Name: DestructiblePile1 1 1 1
+  m_Name: DestructiblePile1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8330,8 +8288,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 7595252555651157137}
   _destructibleType: 0
-  _startingHealth: 10
-  _currentHealth: 9.884143
   _damageStates:
   - normalizedHealth: 0.8
     damageStateContainer: {fileID: 7595252554750897234}
@@ -8743,8 +8699,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 8082955084175814043}
   _destructibleType: 4
-  _startingHealth: 5
-  _currentHealth: 5
   _damageStates:
   - normalizedHealth: 0.4
     damageStateContainer: {fileID: 8082955084314807640}
@@ -9078,8 +9032,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 8143458439250385217}
   _destructibleType: 5
-  _startingHealth: 20
-  _currentHealth: 20
   _damageStates:
   - normalizedHealth: 0.7
     damageStateContainer: {fileID: 8143458438485391746}

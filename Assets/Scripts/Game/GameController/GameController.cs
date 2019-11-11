@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Threading;
 using Game.UI;
 using Photon.Pun;
@@ -86,6 +87,10 @@ namespace Game {
             }
             this.PlayerUs.CreateView(playerUsAnchor);
             // Don't create view for other player as it will be synced over the network
+
+            if (this.GameType == GameType_t.SINGLE_PLAYER) {
+                this.View.Player2Anchor.gameObject.SetActive(false);
+            }
 
             this.CreateDestructiblePile();
         }

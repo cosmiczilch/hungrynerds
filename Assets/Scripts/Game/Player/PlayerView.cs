@@ -15,6 +15,12 @@ namespace Game {
 
         private void Awake() {
             this.HideLaunchIndicatorArrow();
+
+            if (GameController.Instance.GameType == GameController.GameType_t.MULTI_PLAYER &&
+                !MultiPlayerManager.Instance.AreWePlayer1()) {
+                this._launchPosition.Translate(2.19f * 2, 0, 0);
+                this._launchIndicatorArrow.Translate(2.19f * 2, 0, 0);
+            }
         }
 
         public void ShowLaunchArrow(float normalizedStrength = 0.0f, float angle = 0.0f) {

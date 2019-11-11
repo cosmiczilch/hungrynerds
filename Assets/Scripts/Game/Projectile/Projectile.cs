@@ -1,4 +1,5 @@
 using Photon.Pun;
+using TimiMultiPlayer;
 using UnityEngine;
 
 namespace Game {
@@ -13,7 +14,9 @@ namespace Game {
             }
         }
 
-        private float _startTime;
+        [SerializeField] private Transform _artTransform;
+
+        private float _startTime = float.MaxValue;
 
         protected override void Awake() {
             base.Awake();
@@ -24,6 +27,17 @@ namespace Game {
                 child.gameObject.layer = layer;
             }
 
+            if (GameController.Instance.GameType == GameController.GameType_t.MULTI_PLAYER &&
+                (
+                    (!MultiPlayerManager.Instance.AreWePlayer1() && this._photonView.IsMine) ||
+                    (MultiPlayerManager.Instance.AreWePlayer1() && !this._photonView.IsMine)
+                )
+                ) {
+                this._artTransform.Rotate(Vector3.up, 180.0f);
+            }
+        }
+
+        public void MarkAsLaunched() {
             this._startTime = Time.time;
         }
 
