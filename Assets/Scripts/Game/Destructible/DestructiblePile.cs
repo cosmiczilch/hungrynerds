@@ -5,7 +5,7 @@ namespace Game {
 
     public class DestructiblePile : MonoBehaviour {
 
-        [SerializeField] private PhotonView _photonView;
+        [SerializeField] private PhotonView _photonView = null;
 
         private void Awake() {
             int layer = GameController.Instance.GetLayer(this._photonView.IsMine);

@@ -15,12 +15,10 @@ namespace Game {
             }
         }
 
-        [SerializeField] private DestructiblePropertiesHelper.DestructibleType _destructibleType;
+        [SerializeField] private DestructiblePropertiesHelper.DestructibleType _destructibleType = DestructiblePropertiesHelper.DestructibleType.WOOD_BLOCK;
 
-        // TODO: Remove serialized after testing
-        [SerializeField] protected float _startingHealth;
-        [SerializeField] protected float _currentHealth;
-
+        protected float _startingHealth;
+        protected float _currentHealth;
 
         [System.Serializable]
         protected class DamageState {

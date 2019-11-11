@@ -5,7 +5,7 @@ namespace Game.UI {
 
     public class UIGameView : DialogViewBase {
 
-        [SerializeField] private UIDragLauncher _dragLauncher;
+        [SerializeField] private UIDragLauncher _dragLauncher = null;
 
         public class Config {
             public System.Action onLeaveButtonCallback;
