@@ -91,7 +91,7 @@ namespace Game {
             }
         }
 
-        private bool _isDead = false;
+        protected bool _isDead = false;
         private void MarkAsDead() {
             if (this._isDead) {
                 return;
@@ -136,6 +136,15 @@ namespace Game {
                 return;
             }
 
+            if (col.gameObject.CompareTag("ExtremeBounds")) {
+                this.ApplyCollisionImpulse(this._currentHealth + kMinImpulseForFiltering + 1);
+            }
+
+            // Require both entities to have a rigidbody so we don't take damage against empty colliders
+            if (col.rigidbody == null || col.otherRigidbody == null) {
+                return;
+            }
+
             float impulseMagnitude;
             if (col.contactCount <= 0) {
                 impulseMagnitude = col.relativeVelocity.magnitude;
@@ -148,7 +157,13 @@ namespace Game {
                 impulseMagnitude *= otherRigidBody.mass / (otherRigidBody.mass + this._rigidbody2D.mass);
             }
 
+            impulseMagnitude *= this.GetImpulseMultiplier(col.gameObject);
+
             this.ApplyCollisionImpulse(impulseMagnitude);
+        }
+
+        protected virtual float GetImpulseMultiplier(GameObject collidingObject) {
+            return 1.0f;
         }
 
         private void ApplyCollisionImpulse(float impulseMagnitude) {

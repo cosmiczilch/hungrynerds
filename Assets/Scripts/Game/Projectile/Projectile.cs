@@ -15,6 +15,8 @@ namespace Game {
         }
 
         [SerializeField] private Transform _artTransform;
+        [SerializeField] private Transform _artMine;
+        [SerializeField] private Transform _artOther;
 
         private float _startTime = float.MaxValue;
 
@@ -27,6 +29,10 @@ namespace Game {
                 child.gameObject.layer = layer;
             }
 
+            this._artMine.gameObject.SetActive(GameController.Instance.GameType == GameController.GameType_t.SINGLE_PLAYER ||
+                                               this._photonView.IsMine);
+            this._artOther.gameObject.SetActive(GameController.Instance.GameType == GameController.GameType_t.MULTI_PLAYER &&
+                                                !this._photonView.IsMine);
             if (GameController.Instance.GameType == GameController.GameType_t.MULTI_PLAYER &&
                 (
                     (!MultiPlayerManager.Instance.AreWePlayer1() && this._photonView.IsMine) ||
@@ -43,7 +49,12 @@ namespace Game {
 
         private void Update() {
             if ((Time.time - this._startTime) > kLifetimeDurationSeconds) {
-                GameObject.Destroy(this.gameObject);
+                if (GameController.Instance.GameType == GameController.GameType_t.MULTI_PLAYER &&
+                    this._photonView.IsMine) {
+                    PhotonNetwork.Destroy(this.gameObject);
+                } else {
+                    GameObject.Destroy(this.gameObject);
+                }
                 return;
             }
         }

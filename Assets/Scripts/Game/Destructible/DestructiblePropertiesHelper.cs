@@ -21,6 +21,9 @@ namespace Game {
             ICE_PLANK,
             STONE_PLANK,
             STONE_HOLLOW_BLOCK,
+            MONSTER_LITTLE,
+            MONSTER_FAT,
+            MONSTER_TOUGH,
         }
 
         public struct DestructibleProperties {
@@ -44,6 +47,9 @@ namespace Game {
             {DestructibleType.ICE_PLANK, new DestructibleProperties { startingHealth = 5, mass = 10 }},
             {DestructibleType.STONE_PLANK, new DestructibleProperties { startingHealth = 15, mass = 20 }},
             {DestructibleType.STONE_HOLLOW_BLOCK, new DestructibleProperties { startingHealth = 10, mass = 15 }},
+            {DestructibleType.MONSTER_LITTLE, new DestructibleProperties { startingHealth = 5, mass = 5 }},
+            {DestructibleType.MONSTER_FAT	, new DestructibleProperties { startingHealth = 0.4f, mass = 50 }},
+            {DestructibleType.MONSTER_TOUGH	, new DestructibleProperties { startingHealth = 20, mass = 10 }},
         };
 
         public static float GetStartingHealthForType(DestructibleType destructibleType) {

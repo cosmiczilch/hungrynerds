@@ -166,14 +166,6 @@ namespace TimiMultiPlayer {
                 }
                 this._pendingRoomJoinRequest = null;
             }
-//
-//            // #Critical: We only load if we are the first player, else we rely on `PhotonNetwork.AutomaticallySyncScene` to sync our instance scene.
-//            if (PhotonNetwork.CurrentRoom.PlayerCount == 1) {
-//                Debug.Log("Load GameScene");
-//
-//                // Load the Room Level.
-//                PhotonNetwork.LoadLevel("GameScene");
-//            }
         }
 
         // Called when other player entered room
