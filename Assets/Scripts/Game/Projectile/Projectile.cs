@@ -25,8 +25,11 @@ namespace Game {
 
             int layer = GameController.Instance.GetLayer(this._photonView.IsMine);
             this.gameObject.layer = layer;
-            foreach (Transform child in this.gameObject.transform) {
-                child.gameObject.layer = layer;
+            Transform[] childs = this.gameObject.GetComponentsInChildren<Transform>();
+            if (childs != null) {
+                foreach (Transform child in childs) {
+                    child.gameObject.layer = layer;
+                }
             }
 
             this._artMine.gameObject.SetActive(GameController.Instance.GameType == GameController.GameType_t.SINGLE_PLAYER ||
