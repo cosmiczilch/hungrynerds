@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _photonView: {fileID: 899707294363552336}
-  _artTransform: {fileID: 5573661808628323123}
+  _artTransform: {fileID: 434611709}
   _artMine: {fileID: 5573661808628323123}
   _artOther: {fileID: 8488864184513399657}
 --- !u!58 &5110670534369048699
