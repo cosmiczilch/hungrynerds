@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Threading;
 using Game.UI;
-using Photon.Pun;
 using TimiMultiPlayer;
 using TimiShared.Debug;
 using TimiShared.Extensions;
@@ -95,11 +92,30 @@ namespace Game {
             this.CreateDestructiblePile();
         }
 
+        private bool _isGameOver = false;
+        public bool IsGameOver() {
+            return this._isGameOver;
+        }
+
         public void LeaveGame() {
             if (this.GameType == GameType_t.MULTI_PLAYER) {
                 MultiPlayerManager.Instance.LeaveRoom();
             }
             AppSceneManager.Instance.LoadLobbyScene();
+        }
+
+        public void HandleGameOver(bool weWon, bool isFromDisconnect = false) {
+            this._isGameOver = true;
+
+            float delaySeconds = isFromDisconnect ? 1.0f : 2.0f;
+            CoroutineHelper.Instance.RunAfterDelay(delaySeconds, () => {
+                if (this != null && this.View != null) {
+                    UIGameOverController gameOverController = new UIGameOverController(weWon, () => {
+                        this.LeaveGame();
+                    });
+                    gameOverController.PresentDialog();
+                }
+            });
         }
 
         private const string kLayerNamePlayer1 = "GameScenePlayer1";

@@ -1,3 +1,4 @@
+using TimiShared.Debug;
 using TimiShared.Extensions;
 using UnityEngine;
 using Utilities;
@@ -34,6 +35,37 @@ namespace Game {
         public void FlipCameraHorizontal() {
             this._gameCameraFlipper.AssertNotNull("Game Camera Flipper");
             this._gameCameraFlipper.FlipCamera(CameraFlip.FlipDirection.Horizontal);
+        }
+
+        private void Update() {
+            if (GameController.Instance.IsGameOver()) {
+                return;
+            }
+
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            int numOursAlive = 0;
+            int numTheirsAlive = 0;
+            if (enemies != null) {
+                foreach (GameObject enemy in enemies) {
+                    DestructibleEnemy destructibleEnemy = enemy.GetComponent<DestructibleEnemy>();
+                    if (destructibleEnemy != null) {
+                        if (!destructibleEnemy.IsDead) {
+                            if (destructibleEnemy.IsOurs) {
+                                ++numOursAlive;
+                            } else {
+                                ++numTheirsAlive;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (numOursAlive <= 0) {
+                GameController.Instance.HandleGameOver(true);
+            } else if (GameController.Instance.GameType == GameController.GameType_t.MULTI_PLAYER &&
+                       numTheirsAlive <= 0) {
+                GameController.Instance.HandleGameOver(false);
+            }
         }
 
     }

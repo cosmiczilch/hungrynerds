@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3375992652703168585}
   m_Layer: 0
   m_Name: Destructible_MonsterTough
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,7 +132,6 @@ MonoBehaviour:
   _damageStates:
   - normalizedHealth: 0
     damageStateContainer: {fileID: 3344725167355013132}
-  _puffVfxPrefabPath: Prefabs/Vfx/ExplosionBig
 --- !u!114 &3344725168038086863
 MonoBehaviour:
   m_ObjectHideFlags: 0

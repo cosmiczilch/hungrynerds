@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 6361104897505447409}
   m_Layer: 0
   m_Name: Destructible_MonsterFat
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,7 +163,6 @@ MonoBehaviour:
   _damageStates:
   - normalizedHealth: 0
     damageStateContainer: {fileID: 6411240299282818831}
-  _puffVfxPrefabPath: Prefabs/Vfx/ExplosionBig
 --- !u!114 &6411240300212307916
 MonoBehaviour:
   m_ObjectHideFlags: 0

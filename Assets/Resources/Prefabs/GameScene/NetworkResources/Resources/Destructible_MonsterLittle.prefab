@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 7208978056334914612}
   m_Layer: 0
   m_Name: Destructible_MonsterLittle
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +84,6 @@ MonoBehaviour:
   _damageStates:
   - normalizedHealth: 0
     damageStateContainer: {fileID: 6824678120946431288}
-  _puffVfxPrefabPath: Prefabs/Vfx/ExplosionBig
 --- !u!114 &6824678120769803771
 MonoBehaviour:
   m_ObjectHideFlags: 0
