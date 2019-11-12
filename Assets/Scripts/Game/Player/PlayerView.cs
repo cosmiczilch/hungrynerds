@@ -27,8 +27,8 @@ namespace Game {
             this._launchIndicatorArrow.gameObject.SetActive(true);
             this._launchIndicatorArrow.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             this._launchIndicatorArrow.localScale = new Vector3(
-                Mathf.Lerp(0.8f, 2.0f, normalizedStrength),
-                Mathf.Lerp(1.5f, 2.0f, normalizedStrength),
+                Mathf.Lerp(1.2f, 3.0f, normalizedStrength),
+                Mathf.Lerp(1.8f, 2.2f, normalizedStrength),
                 this._launchIndicatorArrow.localScale.z
                 );
         }
