@@ -320,8 +320,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _photonView: {fileID: 1969687621318404304}
   _destructibleType: 0
-  _startingHealth: 10
-  _currentHealth: 10
   _damageStates:
   - normalizedHealth: 0.8
     damageStateContainer: {fileID: 1969687621073618963}
@@ -329,6 +327,7 @@ MonoBehaviour:
     damageStateContainer: {fileID: 1172883723}
   - normalizedHealth: 0
     damageStateContainer: {fileID: 66540326}
+  _puffVfxPrefabPath: Prefabs/Vfx/ExplosionSimple
 --- !u!114 &1969687621318404304
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -163,6 +163,7 @@ MonoBehaviour:
   _damageStates:
   - normalizedHealth: 0
     damageStateContainer: {fileID: 6411240299282818831}
+  _puffVfxPrefabPath: Prefabs/Vfx/ExplosionBig
 --- !u!114 &6411240300212307916
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Photon.Pun;
 using TimiShared.Extensions;
+using TimiShared.Loading;
 using UnityEngine;
 
 namespace Game {
@@ -26,6 +27,10 @@ namespace Game {
             public Transform damageStateContainer;
         }
         [SerializeField] private List<DamageState> _damageStates;
+
+        protected virtual string GetVfxPuffPrefabPath() {
+            return "Prefabs/Vfx/ExplosionSimple";
+        }
 
         protected Rigidbody2D _rigidbody2D;
 
@@ -123,7 +128,16 @@ namespace Game {
                 }
             }
 
+            if (!string.IsNullOrEmpty(this.GetVfxPuffPrefabPath())) {
+                PrefabLoader.Instance.InstantiateAsynchronous(this.GetVfxPuffPrefabPath(), null, g => {
+                    if (g != null && this != null && this.transform != null) {
+                        g.transform.position = this.transform.position;
+                        g.transform.rotation = this.transform.rotation;
+                        g.transform.localScale = this.transform.localScale;
+                    }
+                });
 
+            }
         }
 
         private void OnCollisionEnter2D(Collision2D col) {
