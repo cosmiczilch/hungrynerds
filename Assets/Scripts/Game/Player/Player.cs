@@ -30,6 +30,8 @@ namespace Game {
         private const float kForceMultiplierMin = 2500.0f;
         private const float kForceMultiplierMax = 4000.0f;
 
+        private const float kNextProjectileCooldownSeconds = 3.0f;
+
         public Player(GameController gameController, PlayerType_t playerType) {
             this._gameController = gameController;
             this.PlayerType = playerType;
@@ -60,6 +62,15 @@ namespace Game {
         }
 
         private void LoadNextProjectile() {
+            // Check because this is called from a coroutine
+            if (this == null || this.View == null) {
+                return;
+            }
+
+            // Already have a projectile
+            if (this._currentProjectile != null) {
+                return;
+            }
 
             GameObject projectileGO = null;
             if (this._gameController.GameType == GameController.GameType_t.SINGLE_PLAYER) {
@@ -94,18 +105,20 @@ namespace Game {
             rigidbody2D.AddForce(force);
 
             this._currentProjectile = null;
+
+            CoroutineHelper.Instance.RunAfterDelay(kNextProjectileCooldownSeconds, this.LoadNextProjectile);
         }
 
         public void HandleDragToLaunchStarted() {
             if (this._currentProjectile == null) {
-                this.LoadNextProjectile();
+                return;
             }
             this.View.ShowLaunchArrow();
         }
 
         public void HandleDragToLaunchMoved(float normalizedStrength, float angle) {
             if (this._currentProjectile == null) {
-                this.LoadNextProjectile();
+                return;
             }
             this.View.ShowLaunchArrow(normalizedStrength, angle);
         }
@@ -114,7 +127,7 @@ namespace Game {
             this.View.HideLaunchIndicatorArrow();
 
             if (this._currentProjectile == null) {
-                this.LoadNextProjectile();
+                return;
             }
             this.LaunchCurrentProjectile(normalizedStrength, angle);
         }
