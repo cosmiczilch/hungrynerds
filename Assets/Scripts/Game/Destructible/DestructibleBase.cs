@@ -65,7 +65,7 @@ namespace Game {
         }
 
         protected virtual void Update() {
-            if (this._currentHealth <= 0) {
+            if (this._currentHealth < 0) {
                 this.MarkAsDead();
                 return;
             }
@@ -166,7 +166,7 @@ namespace Game {
                 impulseMagnitude = Vector2.Dot(col.relativeVelocity, col.GetContact(0).normal);
             }
 
-            if (col.rigidbody != null && col.otherRigidbody != null) {
+            if (col.rigidbody != null && col.otherRigidbody != null && this._rigidbody2D != null) {
                 Rigidbody2D otherRigidBody = this._rigidbody2D == col.rigidbody ? col.otherRigidbody : col.rigidbody;
                 impulseMagnitude *= otherRigidBody.mass / (otherRigidBody.mass + this._rigidbody2D.mass);
             }
