@@ -35,7 +35,7 @@ public class AppSceneManager : IInstance {
         });
     }
 
-    public void LoadGameScene(GameController.GameType_t gameType) {
+    public void LoadGameScene(GameController.GameType_t gameType, System.Action callback) {
         LoadingScreenManager.Instance.ShowLoadingScreen(true, false);
 
         this.LoadScene(AppScene.GAME_SCENE, (success) => {
@@ -43,6 +43,9 @@ public class AppSceneManager : IInstance {
                 GameController gameController = new GameController(new GameController.Config {
                     gameType = gameType
                 });
+                if (callback != null) {
+                    callback.Invoke();
+                }
             }
         });
     }

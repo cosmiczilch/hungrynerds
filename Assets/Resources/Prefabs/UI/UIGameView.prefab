@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dragLauncher: {fileID: 6398885559992155903}
+  _closeButton: {fileID: 5591334730916350071}
 --- !u!1 &5591334730916350070
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using TimiShared.Debug;
 using TimiShared.UI;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace Game.UI {
     public class UIGameView : DialogViewBase {
 
         [SerializeField] private UIDragLauncher _dragLauncher = null;
+        [SerializeField] private Transform _closeButton = null;
 
         public class Config {
             public System.Action onLeaveButtonCallback;
@@ -20,6 +22,14 @@ namespace Game.UI {
             this._dragLauncher.Initialize(this._config.onDragLaunchStarted,
                                           this._config.onDragLaunchMoved,
                                           this._config.onDragLaunchEnded);
+
+            // Hide the close button for the first 5 seconds of a match
+            this._closeButton.gameObject.SetActive(false);
+            CoroutineHelper.Instance.RunAfterDelay(5.0f, () => {
+                if (this != null && this._closeButton != null) {
+                    this._closeButton.gameObject.SetActive(true);
+                }
+            });
         }
 
         public void OnLeaveButtonClicked() {

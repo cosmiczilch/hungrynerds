@@ -73,19 +73,21 @@ namespace Lobby {
 
         private void StartGame(GameController.GameType_t gameType) {
             DebugLog.LogColor("Starting game: " + gameType.ToString(), LogColor.green);
-            AppSceneManager.Instance.LoadGameScene(gameType);
+            AppSceneManager.Instance.LoadGameScene(gameType, () => {
 
-            // TODO: Hack: This delay is to make sure the game scenes are created and synced across the different clients
-            // Otherwise, we will see some gameobjects of other players "drift" into their initial positions
-            if (gameType == GameController.GameType_t.SINGLE_PLAYER) {
-                this.RemoveDialog();
-            } else {
-                CoroutineHelper.Instance.RunAfterDelay(2.5f, () => {
-                    if (this != null && this.View != null) {
-                        this.RemoveDialog();
-                    }
-                });
-            }
+                // TODO: Hack: This delay is to make sure the game scenes are created and synced across the different clients
+                // Otherwise, we will see some gameobjects of other players "drift" into their initial positions
+                if (gameType == GameController.GameType_t.SINGLE_PLAYER) {
+                    this.RemoveDialog();
+                } else {
+                    CoroutineHelper.Instance.RunAfterDelay(2.5f, () => {
+                        if (this != null && this.View != null) {
+                            this.RemoveDialog();
+                        }
+                    });
+                }
+
+            });
         }
     }
 }
