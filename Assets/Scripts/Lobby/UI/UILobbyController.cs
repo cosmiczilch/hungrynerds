@@ -42,7 +42,6 @@ namespace Lobby {
             });
             MultiPlayerManager.Instance.LeaveRoom();
 
-            // TODO: Show Error dialog
             DebugLog.LogColor("Timed out waiting for match", LogColor.grey);
         }
 
@@ -75,7 +74,14 @@ namespace Lobby {
         private void StartGame(GameController.GameType_t gameType) {
             DebugLog.LogColor("Starting game: " + gameType.ToString(), LogColor.green);
             AppSceneManager.Instance.LoadGameScene(gameType);
-            this.RemoveDialog();
+
+            // TODO: Hack: This delay is to make sure the game scenes are created and synced across the different clients
+            // Otherwise, we will see some gameobjects of other players "drift" into their initial positions
+            CoroutineHelper.Instance.RunAfterDelay(2.5f, () => {
+                if (this != null && this.View != null) {
+                    this.RemoveDialog();
+                }
+            });
         }
     }
 }
