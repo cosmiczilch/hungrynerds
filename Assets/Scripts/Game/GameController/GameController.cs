@@ -73,6 +73,25 @@ namespace Game {
                 this.PlayerOther = new Player(this, Player.PlayerType_t.Other);
             }
 
+            if (this.GameType == GameType_t.SINGLE_PLAYER) {
+                this.LoadGameSceneObjects();
+
+            } else {
+
+                MultiPlayerManager.Instance.StartGameInRoom();
+                MultiPlayerManager.OnOtherPlayerLeftRoom += this.HandleOtherPlayerLeftRoom;
+
+                // TODO: Hack: This is to give enough time for the other clients to load their game scene as well
+                // Ideally we should be using messages / custom properties on room to do this
+                CoroutineHelper.Instance.RunAfterDelay(1.0f, () => {
+                    this.LoadGameSceneObjects();
+                });
+            }
+        }
+
+        private void LoadGameSceneObjects() {
+
+            DebugLog.LogColor("Creating game view", LogColor.blue);
             this.CreateView();
 
             Transform playerUsAnchor = null;
@@ -82,6 +101,7 @@ namespace Game {
                 playerUsAnchor = MultiPlayerManager.Instance.AreWePlayer1() ? this.View.Player1Anchor
                                                                             : this.View.Player2Anchor;
             }
+            DebugLog.LogColor("Creating player view", LogColor.blue);
             this.PlayerUs.CreateView(playerUsAnchor);
             // Don't create view for other player as it will be synced over the network
 
@@ -89,9 +109,8 @@ namespace Game {
                 this.View.Player2Anchor.gameObject.SetActive(false);
             }
 
+            DebugLog.LogColor("Creating our destructible pile", LogColor.blue);
             this.CreateDestructiblePile();
-
-            MultiPlayerManager.OnOtherPlayerLeftRoom += this.HandleOtherPlayerLeftRoom;
         }
 
         private bool _isGameOver = false;
@@ -114,11 +133,7 @@ namespace Game {
 
             this._isGameOver = true;
 
-            // If this is from other player disconnecting, leave room immediately so that
-            // new players looking for matches don't stumble into this room
-            if (isFromDisconnect) {
-                MultiPlayerManager.Instance.LeaveRoom();
-            }
+            DebugLog.LogWarningColor("Game over | isFromDisconnect: " + isFromDisconnect.ToString(), LogColor.blue);
 
             float delaySeconds = isFromDisconnect ? 1.0f : 2.0f;
             CoroutineHelper.Instance.RunAfterDelay(delaySeconds, () => {
