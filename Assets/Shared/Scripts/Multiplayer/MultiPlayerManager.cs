@@ -77,6 +77,13 @@ namespace TimiMultiPlayer {
             }
         }
 
+        public void StartGameInRoom() {
+            if (PhotonNetwork.IsConnected && PhotonNetwork.CurrentRoom != null) {
+                DebugLog.LogColor("Marking room as closed", LogColor.blue);
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+            }
+        }
+
         public void LeaveRoom() {
             this._pendingRoomJoinRequest = null;
             if (PhotonNetwork.IsConnected && PhotonNetwork.CurrentRoom != null) {
@@ -178,6 +185,9 @@ namespace TimiMultiPlayer {
         public override void OnPlayerLeftRoom(Player otherPlayer) {
             DebugLog.LogColor("Player left room: " + otherPlayer.ActorNumber.ToString(), LogColor.green);
             OnOtherPlayerLeftRoom.Invoke();
+
+            // We should leave the room as well to prevent new players searching for rooms from joining this room
+            this.LeaveRoom();
         }
         #endregion
 
