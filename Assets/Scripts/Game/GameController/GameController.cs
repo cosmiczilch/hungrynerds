@@ -90,6 +90,8 @@ namespace Game {
             }
 
             this.CreateDestructiblePile();
+
+            MultiPlayerManager.OnOtherPlayerLeftRoom += this.HandleOtherPlayerLeftRoom;
         }
 
         private bool _isGameOver = false;
@@ -105,7 +107,18 @@ namespace Game {
         }
 
         public void HandleGameOver(bool weWon, bool isFromDisconnect = false) {
+            // Don't process this more than once
+            if (this._isGameOver) {
+                return;
+            }
+
             this._isGameOver = true;
+
+            // If this is from other player disconnecting, leave room immediately so that
+            // new players looking for matches don't stumble into this room
+            if (isFromDisconnect) {
+                MultiPlayerManager.Instance.LeaveRoom();
+            }
 
             float delaySeconds = isFromDisconnect ? 1.0f : 2.0f;
             CoroutineHelper.Instance.RunAfterDelay(delaySeconds, () => {
@@ -117,6 +130,11 @@ namespace Game {
                 }
             });
         }
+
+        private void HandleOtherPlayerLeftRoom() {
+            this.HandleGameOver(true, true);
+        }
+
 
         private const string kLayerNamePlayer1 = "GameScenePlayer1";
         private const string kLayerNamePlayer2 = "GameScenePlayer2";
