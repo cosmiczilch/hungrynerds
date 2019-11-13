@@ -37,8 +37,19 @@ namespace Game {
             this._gameCameraFlipper.FlipCamera(CameraFlip.FlipDirection.Horizontal);
         }
 
+        private const float kMinTimeBeforeCheckingWinCOnditionSeconds = 15.0f;
+        private float _startTime = float.MaxValue;
+
+        private void Awake() {
+            this._startTime = Time.time;
+        }
+
         private void Update() {
             if (GameController.Instance.IsGameOver()) {
+                return;
+            }
+
+            if ((Time.time - this._startTime) <= kMinTimeBeforeCheckingWinCOnditionSeconds) {
                 return;
             }
 
